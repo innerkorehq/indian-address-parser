@@ -86,7 +86,14 @@ class AddressParser:
             else:
                 device = "cpu"
 
-        base = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+        # `torch_dtype` is deprecated in favor of `dtype` in newer transformers, but
+        # `dtype` doesn't exist yet on older ones (verified: fails on 4.51.0) — try the
+        # new name first, fall back to the old one, so this doesn't break either way
+        # as transformers eventually drops the deprecated kwarg entirely.
+        try:
+            base = AutoModelForCausalLM.from_pretrained(base_model, dtype=dtype)
+        except TypeError:
+            base = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
         self.model = PeftModel.from_pretrained(base, adapter_repo)
         self.model.to(device)
         self.model.eval()
