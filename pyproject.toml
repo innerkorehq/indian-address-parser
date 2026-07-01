@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "indian-address-parser"
+version = "0.1.0"
+description = "Parse raw Indian address strings into structured fields using a fine-tuned Qwen3 LoRA adapter"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9"
+authors = [
+    { name = "Gagandeep" }
+]
+keywords = ["nlp", "address-parsing", "india", "named-entity-recognition", "lora", "qwen"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Text Processing :: Linguistic",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.45.0",
+    "peft>=0.12.0",
+    "huggingface_hub>=0.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/innerkorehq/indian-address-parser"
+Repository = "https://github.com/innerkorehq/indian-address-parser"
+Model = "https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser"
+
+[project.scripts]
+indian-address-parser = "indian_address_parser.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/indian_address_parser"]
+
+[tool.pytest.ini_options]
+markers = ["slow: requires network access, downloads real model weights"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0.0"]
