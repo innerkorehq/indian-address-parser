@@ -64,6 +64,17 @@ for training data, LoRA config, per-field evaluation results (100% JSON parse ra
 mean field accuracy on held-out test data), and known limitations (locality/subLocality/
 subsubLocality/village field-boundary ambiguity, etc.).
 
+## Comparison to other models
+
+[`benchmarks/`](benchmarks/) has a head-to-head comparison against Shiprocket's
+[open-tinybert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-tinybert-indian-address-ner)
+on a 237-example held-out gold test set. Summary: this model scores higher on
+every one of the 9 conceptually-shared fields (sometimes by a wide margin —
+e.g. city 91.3% vs 17.4%, pincode 100% vs 69.2%), while Shiprocket's 6-layer
+TinyBERT is ~240x faster per address. See [`benchmarks/README.md`](benchmarks/README.md)
+for the full field-by-field results and methodology (the two models use
+different field taxonomies, so only overlapping fields are scored).
+
 ## Apple Silicon (MLX) users
 
 This package uses `transformers`+`peft`, which works on CUDA, MPS, and CPU but is not the
