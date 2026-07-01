@@ -64,6 +64,11 @@ for training data, LoRA config, per-field evaluation results (100% JSON parse ra
 mean field accuracy on held-out test data), and known limitations (locality/subLocality/
 subsubLocality/village field-boundary ambiguity, etc.).
 
+## Datasets
+
+- [gagan1985/indian-addresses-gold](https://huggingface.co/datasets/gagan1985/indian-addresses-gold) — the 4,834-example span-labeled training data behind this model
+- [gagan1985/indian-addresses-raw](https://huggingface.co/datasets/gagan1985/indian-addresses-raw) — the 4.37M-record raw, unlabeled corpus this gold set was drawn from (PII-redacted; see the dataset card for methodology)
+
 ## Comparison to other models
 
 [`benchmarks/`](benchmarks/) has a head-to-head comparison against Shiprocket's

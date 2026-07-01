@@ -5,3 +5,5 @@ dist/
 build/
 *.egg-info/
 .venv/
+dataset_scripts/*.parquet
+dataset_scripts/*.log
