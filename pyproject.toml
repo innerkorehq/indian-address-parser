@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "indian-address-parser"
-version = "0.1.1"
+version = "0.1.2"
 description = "Parse raw Indian address strings into structured fields using a fine-tuned Qwen3 LoRA adapter"
 readme = "README.md"
 license = "Apache-2.0"
@@ -21,7 +21,7 @@ classifiers = [
 ]
 dependencies = [
     "torch>=2.0.0",
-    "transformers>=4.45.0",
+    "transformers>=4.51.0",  # Qwen3 model_type support was added exactly at 4.51.0 (verified)
     "peft>=0.12.0",
     "huggingface_hub>=0.25.0",
 ]

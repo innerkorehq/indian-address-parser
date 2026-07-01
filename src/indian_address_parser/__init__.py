@@ -1,4 +1,4 @@
 from .parser import ALL_FIELDS, DEFAULT_ADAPTER_REPO, DEFAULT_BASE_MODEL, SYSTEM_PROMPT, AddressParser
 
 __all__ = ["AddressParser", "ALL_FIELDS", "SYSTEM_PROMPT", "DEFAULT_ADAPTER_REPO", "DEFAULT_BASE_MODEL"]
-__version__ = "0.1.1"
+__version__ = "0.1.2"
