@@ -8,6 +8,20 @@ this package ships only inference code, no weights.
 from __future__ import annotations
 
 import json
+import os
+
+# This package only needs the PyTorch backend. Without this, `transformers`/`peft`
+# can pull in a TensorFlow import chain (transformers.models.bloom -> ... ->
+# image_transforms.py -> `import tensorflow`) purely as a side effect of module
+# loading — and in environments where TF's own numpy/h5py binary versions don't
+# match (a common conda/Anaconda footgun, unrelated to this package), that import
+# fails with things like "numpy.dtype size changed, may indicate binary
+# incompatibility" and crashes AddressParser() before it ever touches TensorFlow
+# functionality. Setting these before transformers/peft are imported anywhere
+# short-circuits transformers' TF detection so that chain is never triggered.
+os.environ.setdefault("USE_TF", "0")
+os.environ.setdefault("USE_TORCH", "1")
+os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
 
 DEFAULT_ADAPTER_REPO = "gagan1985/qwen3-0.6b-indian-address-parser"
 DEFAULT_BASE_MODEL = "Qwen/Qwen3-0.6B"
