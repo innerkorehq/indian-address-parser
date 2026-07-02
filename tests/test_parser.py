@@ -15,6 +15,7 @@ def test_import_and_constants():
         DEFAULT_ADAPTER_REPO,
         DEFAULT_BASE_MODEL,
         DEFAULT_T5_MODEL,
+        DEFAULT_TINYBERT_MODEL,
         SYSTEM_PROMPT,
     )
 
@@ -23,6 +24,7 @@ def test_import_and_constants():
     assert DEFAULT_T5_MODEL == "gagan1985/flan-t5-small-indian-address-parser"
     assert DEFAULT_ADAPTER_REPO == "gagan1985/qwen3-0.6b-indian-address-parser"
     assert DEFAULT_BASE_MODEL == "Qwen/Qwen3-0.6B"
+    assert DEFAULT_TINYBERT_MODEL == "gagan1985/tinybert-4l-312d-indian-address-parser"
     assert "Fields:" in SYSTEM_PROMPT
 
 
@@ -51,6 +53,19 @@ def test_parse_real_address_qwen():
     from indian_address_parser import AddressParser
 
     parser = AddressParser(backend="qwen")
+    result = parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
+
+    assert result["houseNumber"] == "FLAT NO.32"
+    assert result["houseName"] == "UTTARA TOWERS"
+    assert result["pincode"] == "781029"
+    assert "_parse_error" not in result
+
+
+@pytest.mark.slow
+def test_parse_real_address_tinybert():
+    from indian_address_parser import AddressParser
+
+    parser = AddressParser(backend="tinybert")
     result = parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
 
     assert result["houseNumber"] == "FLAT NO.32"

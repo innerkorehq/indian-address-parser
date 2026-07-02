@@ -1,8 +1,8 @@
-"""Compare this package's two models (flan-t5-small default, Qwen3-0.6B LoRA)
-against shiprocket-ai/open-modernbert-indian-address-ner on a held-out gold
-test set.
+"""Compare this package's three models (flan-t5-small default, Qwen3-0.6B LoRA,
+TinyBERT 4L/312D) against shiprocket-ai/open-modernbert-indian-address-ner on
+a held-out gold test set.
 
-Our two models use the SAME 13-field taxonomy (houseNumber/houseName/poi/
+Our three models use the SAME 13-field taxonomy (houseNumber/houseName/poi/
 street/subsubLocality/subLocality/locality/village/subDistrict/district/city/
 state/pincode). Shiprocket's model uses a different, 11-entity BIO-NER schema
 (building_name/house_details/road/sub_locality/locality/city/state/pincode/
@@ -15,10 +15,10 @@ model.
 
 Usage:
     pip install indian-address-parser transformers torch
-    python compare_models.py                      # full 237-example benchmark
-    python compare_models.py --n 50                # quick subset
-    python compare_models.py --models t5 modernbert  # skip the slower qwen backend
-    python compare_models.py --out results.json    # save detailed results
+    python compare_models.py                          # full 237-example benchmark, all 4 models
+    python compare_models.py --n 50                    # quick subset
+    python compare_models.py --models t5 modernbert     # skip the slower qwen backend
+    python compare_models.py --out results.json        # save detailed results
 """
 from __future__ import annotations
 
@@ -29,6 +29,7 @@ import time
 MODEL_LABELS = {
     "t5": "flan-t5-small (ours, default)",
     "qwen": "qwen3-0.6b (ours, previous default)",
+    "tinybert": "tinybert-4l-312d (ours)",
     "modernbert": "shiprocket modernbert",
 }
 # Short labels for the fixed-width table columns; MODEL_LABELS (above) is used
@@ -36,9 +37,11 @@ MODEL_LABELS = {
 MODEL_SHORT_LABELS = {
     "t5": "t5 (ours)",
     "qwen": "qwen (ours)",
+    "tinybert": "tinybert (ours)",
     "modernbert": "modernbert",
 }
 ALL_MODELS = tuple(MODEL_LABELS)
+OUR_MODELS = ("t5", "qwen", "tinybert")
 
 # canonical_field -> shiprocket_entity_group. Only fields with a real
 # conceptual match on both sides are included; this is the intersection, not
@@ -110,7 +113,7 @@ def run_shiprocket(addresses: list[str]) -> tuple[list[dict], float]:
 
 
 def run_model(name: str, addresses: list[str]) -> tuple[list[dict], float]:
-    if name in ("t5", "qwen"):
+    if name in OUR_MODELS:
         return run_ours(addresses, backend=name)
     if name == "modernbert":
         return run_shiprocket(addresses)
@@ -120,7 +123,11 @@ def run_model(name: str, addresses: list[str]) -> tuple[list[dict], float]:
 def score(benchmark: list[dict], preds: dict[str, list[dict]]) -> dict:
     n = len(benchmark)
     stats = {field: {m: 0 for m in preds} | {"gold_present": 0} for field in FIELD_MAP}
-    overall = {m: {"exact": 0, "json_ok": 0} for m in preds if m in ("t5", "qwen")}
+    # "json_ok" is trivially 100% for tinybert — token classification always
+    # produces a well-formed field dict, there's no JSON-parse failure mode.
+    # Kept in the same overall-stats loop as t5/qwen for a uniform report
+    # rather than a special-cased branch.
+    overall = {m: {"exact": 0, "json_ok": 0} for m in preds if m in OUR_MODELS}
 
     for i, item in enumerate(benchmark):
         gold = item["gold"]
@@ -186,10 +193,14 @@ def print_report(results: dict, timings: dict[str, float], n: int):
     for m in models:
         if m in results["overall"]:
             o = results["overall"][m]
-            print(f"{MODEL_LABELS[m]} JSON parse rate:     {100*o['json_parse_rate']:.1f}%")
+            # tinybert (token classification) always produces a well-formed
+            # dict — there's no JSON-parse failure mode, so that line is
+            # skipped for it rather than printing a trivially-always-100% stat.
+            if m in ("t5", "qwen"):
+                print(f"{MODEL_LABELS[m]} JSON parse rate:     {100*o['json_parse_rate']:.1f}%")
             print(f"{MODEL_LABELS[m]} overall exact match: {100*o['exact_match']:.1f}% (all {len(FIELD_MAP)} shared fields correct)")
     print()
-    if "t5" in models or "qwen" in models:
+    if any(m in models for m in OUR_MODELS):
         print(f"Fields our models predict that shiprocket's schema has no equivalent for: {', '.join(OUR_ONLY_FIELDS)}")
     if "modernbert" in models:
         print(f"Entities shiprocket predicts that we don't have an equivalent field for: {', '.join(THEIRS_ONLY_ENTITIES)}")

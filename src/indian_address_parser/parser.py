@@ -1,6 +1,6 @@
 """Core AddressParser class.
 
-Two backends, both fetched from Hugging Face Hub — this package ships only
+Three backends, all fetched from Hugging Face Hub — this package ships only
 inference code, no weights:
 
 - "t5" (default): a full fine-tune of google/flan-t5-small
@@ -9,7 +9,12 @@ inference code, no weights:
   points lower accuracy on rare/ambiguous fields.
 - "qwen": a LoRA adapter on Qwen/Qwen3-0.6B
   (gagan1985/qwen3-0.6b-indian-address-parser). ~596M params, causal LM, needs
-  both the adapter and the base model. Slower and heavier; the more accurate option.
+  both the adapter and the base model. The most accurate option.
+- "tinybert": a full fine-tune of huawei-noah/TinyBERT_General_4L_312D
+  (gagan1985/tinybert-4l-312d-indian-address-parser). ~14M params, BERT-style
+  encoder doing token classification (BIO tagging) rather than JSON
+  generation — by far the smallest and fastest option, with lower field
+  accuracy than either generative model, particularly on longer/rarer fields.
 """
 from __future__ import annotations
 
@@ -32,8 +37,9 @@ os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
 DEFAULT_T5_MODEL = "gagan1985/flan-t5-small-indian-address-parser"
 DEFAULT_ADAPTER_REPO = "gagan1985/qwen3-0.6b-indian-address-parser"
 DEFAULT_BASE_MODEL = "Qwen/Qwen3-0.6B"
+DEFAULT_TINYBERT_MODEL = "gagan1985/tinybert-4l-312d-indian-address-parser"
 
-BACKENDS = ("t5", "qwen")
+BACKENDS = ("t5", "qwen", "tinybert")
 
 ALL_FIELDS = (
     "houseNumber",
@@ -65,6 +71,42 @@ USER_TEMPLATE = "Parse this address:\n{raw_address}"
 T5_TASK_PREFIX = "parse indian address: "
 T5_MAX_INPUT_LENGTH = 160
 
+TINYBERT_MAX_LENGTH = 160
+TINYBERT_LABELS = ["O"] + [f"{prefix}-{field}" for field in ALL_FIELDS for prefix in ("B", "I")]
+TINYBERT_ID2LABEL = {i: label for i, label in enumerate(TINYBERT_LABELS)}
+
+
+def _extract_fields_from_bio(raw_address: str, offsets: list[tuple[int, int]], pred_label_ids: list[int]) -> dict:
+    """Reconstruct the ALL_FIELDS dict from per-token BIO predictions by
+    slicing the raw address text at each contiguous B-/I- run's char span —
+    never `tokenizer.decode`, which would lose casing and introduce
+    WordPiece-merge artifacts (e.g. "##" continuation glue)."""
+    result = {f: None for f in ALL_FIELDS}
+    current_field = None
+    current_start = None
+    current_end = None
+
+    def flush():
+        if current_field is not None and result[current_field] is None:
+            result[current_field] = raw_address[current_start:current_end]
+
+    for (start, end), label_id in zip(offsets, pred_label_ids):
+        if start == end:
+            continue
+        label = TINYBERT_ID2LABEL[label_id]
+        if label == "O":
+            flush()
+            current_field = None
+            continue
+        prefix, field = label.split("-", 1)
+        if prefix == "B" or field != current_field:
+            flush()
+            current_field, current_start, current_end = field, start, end
+        else:
+            current_end = end
+    flush()
+    return result
+
 
 def _pick_device_and_dtype(device: str | None):
     import torch
@@ -90,7 +132,8 @@ class AddressParser:
         >>> parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
         {'houseNumber': 'FLAT NO.32', 'houseName': 'UTTARA TOWERS', 'poi': None, ...}
 
-        >>> parser = AddressParser(backend="qwen")  # larger, more accurate LoRA model
+        >>> parser = AddressParser(backend="qwen")  # most accurate, LoRA model
+        >>> parser = AddressParser(backend="tinybert")  # smallest, fastest model
         >>> parser.parse("...")
     """
 
@@ -110,8 +153,10 @@ class AddressParser:
 
         if backend == "t5":
             self._init_t5(model_repo or DEFAULT_T5_MODEL, device)
-        else:
+        elif backend == "qwen":
             self._init_qwen(adapter_repo or DEFAULT_ADAPTER_REPO, base_model or DEFAULT_BASE_MODEL, device)
+        else:
+            self._init_tinybert(model_repo or DEFAULT_TINYBERT_MODEL, device)
 
     def _init_t5(self, model_repo: str, device: str | None):
         from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
@@ -146,15 +191,26 @@ class AddressParser:
         self.model.eval()
         self.device = device
 
+    def _init_tinybert(self, model_repo: str, device: str | None):
+        from transformers import AutoModelForTokenClassification, AutoTokenizer
+
+        device, dtype = _pick_device_and_dtype(device)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_repo)
+        self.model = AutoModelForTokenClassification.from_pretrained(model_repo)
+        self.model.to(device)
+        self.model.eval()
+        self.device = device
+
     def parse(self, raw_address: str) -> dict:
         """Parse a single raw address string. Returns a dict with all 13 ALL_FIELDS
-        keys (null for fields not present). On generation output that isn't valid
-        JSON, all fields are null and `_parse_error` holds the raw model output."""
-        if self.backend == "t5":
-            generated = self._generate_t5(raw_address)
-        else:
-            generated = self._generate_qwen(raw_address)
+        keys (null for fields not present). For the generative backends (t5, qwen),
+        output that isn't valid JSON leaves all fields null and sets `_parse_error`
+        to the raw model output; the tinybert backend (token classification) always
+        produces a well-formed dict, so `_parse_error` never applies to it."""
+        if self.backend == "tinybert":
+            return self._predict_tinybert(raw_address)
 
+        generated = self._generate_t5(raw_address) if self.backend == "t5" else self._generate_qwen(raw_address)
         try:
             result = json.loads(generated.strip())
             result = {f: result.get(f) for f in ALL_FIELDS}
@@ -199,6 +255,20 @@ class AddressParser:
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         return self.tokenizer.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+
+    def _predict_tinybert(self, raw_address: str) -> dict:
+        import torch
+
+        enc = self.tokenizer(
+            raw_address, return_tensors="pt", return_offsets_mapping=True,
+            truncation=True, max_length=TINYBERT_MAX_LENGTH,
+        )
+        offsets = enc.pop("offset_mapping")[0].tolist()
+        enc = enc.to(self.device)
+        with torch.no_grad():
+            out = self.model(**enc)
+        pred_ids = out.logits[0].argmax(-1).tolist()
+        return _extract_fields_from_bio(raw_address, offsets, pred_ids)
 
     def parse_batch(self, addresses: list[str]) -> list[dict]:
         """Parse multiple addresses sequentially. See `parse` for the per-item shape."""

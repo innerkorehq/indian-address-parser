@@ -4,7 +4,8 @@ Usage:
     indian-address-parser "FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029"
     cat addresses.txt | indian-address-parser --stdin
     indian-address-parser --file addresses.txt --out results.jsonl
-    indian-address-parser --backend qwen "..."   # larger, more accurate model
+    indian-address-parser --backend qwen "..."       # larger, more accurate model
+    indian-address-parser --backend tinybert "..."   # smallest, fastest model
 """
 from __future__ import annotations
 
@@ -12,7 +13,7 @@ import argparse
 import json
 import sys
 
-from .parser import BACKENDS, DEFAULT_ADAPTER_REPO, DEFAULT_BASE_MODEL, DEFAULT_T5_MODEL, AddressParser
+from .parser import BACKENDS, DEFAULT_ADAPTER_REPO, DEFAULT_BASE_MODEL, AddressParser
 
 
 def main():
@@ -23,10 +24,12 @@ def main():
     p.add_argument("--out", help="Write JSONL output to file (default: stdout)")
     p.add_argument(
         "--backend", choices=BACKENDS, default="t5",
-        help="Model backend: 't5' (default, flan-t5-small, lighter/faster) or "
-             "'qwen' (Qwen3-0.6B LoRA, larger/more accurate)",
+        help="Model backend: 't5' (default, flan-t5-small, lighter/faster), "
+             "'qwen' (Qwen3-0.6B LoRA, most accurate), or "
+             "'tinybert' (TinyBERT 4L/312D, smallest/fastest)",
     )
-    p.add_argument("--model-repo", default=DEFAULT_T5_MODEL, help="HF Hub repo for the t5 backend")
+    p.add_argument("--model-repo", default=None,
+                    help="HF Hub repo for the t5 or tinybert backend (defaults to each backend's own model)")
     p.add_argument("--adapter-repo", default=DEFAULT_ADAPTER_REPO, help="HF Hub repo for the qwen backend's LoRA adapter")
     p.add_argument("--base-model", default=DEFAULT_BASE_MODEL, help="HF Hub repo for the qwen backend's base model")
     args = p.parse_args()

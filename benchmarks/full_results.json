@@ -4,6 +4,7 @@
     "models": [
       "t5",
       "qwen",
+      "tinybert",
       "modernbert"
     ],
     "overall": {
@@ -14,69 +15,83 @@
       "qwen": {
         "json_parse_rate": 1.0,
         "exact_match": 0.3037974683544304
+      },
+      "tinybert": {
+        "json_parse_rate": 1.0,
+        "exact_match": 0.22784810126582278
       }
     },
     "per_field": {
       "houseNumber": {
         "t5": 109,
         "qwen": 109,
+        "tinybert": 103,
         "modernbert": 56,
         "gold_present": 129
       },
       "houseName": {
         "t5": 84,
         "qwen": 92,
+        "tinybert": 85,
         "modernbert": 67,
         "gold_present": 104
       },
       "street": {
         "t5": 60,
         "qwen": 68,
+        "tinybert": 63,
         "modernbert": 49,
         "gold_present": 126
       },
       "locality": {
         "t5": 31,
         "qwen": 35,
+        "tinybert": 38,
         "modernbert": 6,
         "gold_present": 104
       },
       "subLocality": {
         "t5": 7,
         "qwen": 12,
+        "tinybert": 0,
         "modernbert": 0,
         "gold_present": 51
       },
       "city": {
         "t5": 132,
         "qwen": 136,
+        "tinybert": 123,
         "modernbert": 7,
         "gold_present": 149
       },
       "state": {
         "t5": 223,
         "qwen": 225,
+        "tinybert": 197,
         "modernbert": 84,
         "gold_present": 234
       },
       "pincode": {
         "t5": 232,
         "qwen": 237,
+        "tinybert": 235,
         "modernbert": 175,
         "gold_present": 237
       },
       "poi": {
         "t5": 0,
         "qwen": 12,
+        "tinybert": 8,
         "modernbert": 2,
         "gold_present": 39
       }
     }
   },
   "timing": {
-    "t5": 682.8660914170032,
-    "qwen": 756.560262250001,
-    "modernbert": 5.4945890410017455
+    "t5": 647.5598243750064,
+    "qwen": 768.9287071660001,
+    "tinybert": 3.445808666998346,
+    "modernbert": 4.917341957996541
   },
   "per_example": [
     {
@@ -120,6 +135,21 @@
         "subLocality": null,
         "locality": null,
         "village": "PEDANANDIPALLE AGRAHARAMPEDANANDIPALLE AGRAHARAM",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531030"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "PEDANANDIPALLE AGRAHARA",
+        "village": "MPEDANANDIPALLE",
         "subDistrict": null,
         "district": "ANAKAPALLI",
         "city": null,
@@ -172,6 +202,21 @@
         "poi": null,
         "street": "A.T.ROAD",
         "subsubLocality": "STATION CHARIALI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Sibsagar",
+        "city": "SIVASAGAR",
+        "state": "AS",
+        "pincode": "785640"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "HANSARAJ BHAWAN STATION",
+        "poi": null,
+        "street": "CHAR",
+        "subsubLocality": "IALI",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -234,6 +279,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "House No. 3158",
+        "houseName": "Paradise Enclave",
+        "poi": null,
+        "street": "Sector-50D",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "House No. 3158,",
         "building_name": " Paradise Enclave",
@@ -276,6 +336,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "G. M. TOWER",
+        "poi": null,
+        "street": "M. S. ROAD",
+        "subsubLocality": "FANCY BAZAR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "G. M. TOWER",
         "poi": null,
@@ -345,6 +420,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "DAS COMPLEX",
+        "poi": "SBI OFFICE",
+        "street": "SOUTH",
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "building_name": "DAS COMPLEX,",
         "landmarks": " NEAR SBI OFFICE, SOUTH GUWAHATI AN ,",
@@ -395,6 +485,21 @@
         "subLocality": null,
         "locality": null,
         "village": "Chennampalli",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515701"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "ChennampalliChennampalli",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -455,6 +560,21 @@
         "state": "AS",
         "pincode": "784001"
       },
+      "tinybert": {
+        "houseNumber": "4",
+        "houseName": null,
+        "poi": "Pradip Bhawan",
+        "street": "Bylane",
+        "subsubLocality": "Baraholia",
+        "subLocality": null,
+        "locality": "pur",
+        "village": null,
+        "subDistrict": null,
+        "district": "Sonitpur",
+        "city": "Tez",
+        "state": "AS",
+        "pincode": "784001"
+      },
       "modernbert": {
         "house_details": "4 Bylane",
         "road": ",",
@@ -497,6 +617,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "NABIN BHAWAN",
+        "poi": null,
+        "street": "LAMB ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "NABIN BHAWAN",
         "poi": null,
@@ -566,6 +701,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516227"
       },
+      "tinybert": {
+        "houseNumber": "8-2-31",
+        "houseName": null,
+        "poi": "post office",
+        "street": "bad",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "vel",
+        "village": null,
+        "subDistrict": "municipality",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516227"
+      },
       "modernbert": {
         "landmarks": " opposite post office,badvel municipality,gopavaram mandalam,",
         "house_details": "8-2-31,",
@@ -622,6 +772,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515435"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Singanamala",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": "Anantapur",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515435"
+      },
       "modernbert": {
         "locality": "NANTHAP  Singanamala, NTHAP",
         "road": "anamala P",
@@ -669,6 +834,21 @@
         "street": "NETAJI SUBHASH ROAD",
         "subsubLocality": null,
         "subLocality": "FATASIL",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781009"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "AJITSARIA COMPLEX",
+        "poi": null,
+        "street": "NETAJI SUBHASH ROAD",
+        "subsubLocality": "FATASIL",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -731,6 +911,21 @@
         "state": "CH",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "H.No.5151",
+        "houseName": "Modern",
+        "poi": "Housing Complex",
+        "street": "1",
+        "subsubLocality": "Manimajra",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "H.No.5151,Category 1,",
         "building_name": " Modern Housing Complex,",
@@ -778,6 +973,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "GOOTY",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515401"
+      },
+      "tinybert": {
+        "houseNumber": "#",
+        "houseName": null,
+        "poi": "NEAR ROYAL TALKIES",
+        "street": "GOO",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
@@ -841,6 +1051,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516390"
       },
+      "tinybert": {
+        "houseNumber": "1-124",
+        "houseName": null,
+        "poi": null,
+        "street": "KA",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "R.tummala palle Puliven",
+        "village": "dl",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516390"
+      },
       "modernbert": {
         "landmarks": "R umm  palle Puliv la",
         "house_details": "A 1-124, rag am",
@@ -889,6 +1114,21 @@
         "street": "A. K. AZAD ROAD",
         "subsubLocality": null,
         "subLocality": "REHABARI",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
+      "tinybert": {
+        "houseNumber": "77",
+        "houseName": "SADGURU BHAWAN",
+        "poi": null,
+        "street": "A. K. AZAD ROAD",
+        "subsubLocality": "REHABARI",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -951,6 +1191,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516474"
       },
+      "tinybert": {
+        "houseNumber": "1/37",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "BUKKAPATNAM",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516474"
+      },
       "modernbert": {
         "house_details": "1/37, 1/37,",
         "landmarks": " BUKKAPAT , ukkapatnam",
@@ -999,6 +1254,21 @@
         "poi": null,
         "street": "H B ROAD MACHKHOWA",
         "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781009"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SHYAM MANSION",
+        "poi": null,
+        "street": "H B ROAD",
+        "subsubLocality": "MACHKHOWA",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -1063,6 +1333,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515435"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "GuguduGUGUDU",
+        "village": null,
+        "subDistrict": "rpala Mandal",
+        "district": "Anantapur",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515435"
+      },
       "modernbert": {
         "road": " Narpala Mandal",
         "locality": " Anantapur District N",
@@ -1118,6 +1403,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515842"
       },
+      "tinybert": {
+        "houseNumber": "00-0",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "poliki",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515842"
+      },
       "modernbert": {
         "house_details": "00-0, 00-0,",
         "landmarks": " poliki,  Poliki,  Poliki  poliki,  Poliki,  Poliki",
@@ -1163,6 +1463,21 @@
         "houseNumber": null,
         "houseName": "SM COMPLEX",
         "poi": "BANGLADESH HIGH COMMISSION OFFICE",
+        "street": "RG BARUAH ROAD",
+        "subsubLocality": "GANESHGURI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SM COMPLEX",
+        "poi": "TO",
         "street": "RG BARUAH ROAD",
         "subsubLocality": "GANESHGURI",
         "subLocality": null,
@@ -1229,6 +1544,21 @@
         "state": "ASSAM",
         "pincode": "781021"
       },
+      "tinybert": {
+        "houseNumber": "A1",
+        "houseName": "SWAGAT APARTMENT",
+        "poi": null,
+        "street": "KARBI PATH",
+        "subsubLocality": "UNIMAID",
+        "subLocality": "AN",
+        "locality": "BAM",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": null,
+        "state": "ASSAM",
+        "pincode": "781021"
+      },
       "modernbert": {
         "house_details": "A1,",
         "building_name": " SWAGAT APARTMENT",
@@ -1285,6 +1615,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "# 1303",
+        "houseName": "PROPGRESSIVE ENCLAVE",
+        "poi": null,
+        "street": "SECTOR 50B",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "# 1303,",
         "building_name": " PROPGRESSIVE ENCLAVE,",
@@ -1331,6 +1676,21 @@
         "poi": null,
         "street": "BILPAR A. K. AZAD ROAD, REHABARI",
         "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "ANUJ BHAWAN",
+        "poi": null,
+        "street": "A. K. AZAD ROAD",
+        "subsubLocality": "BILPAR",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -1394,6 +1754,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "533450"
       },
+      "tinybert": {
+        "houseNumber": "Go",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "rsa",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533450"
+      },
       "modernbert": {
         "house_details": "Gorsa 1-85/2, 1,",
         "landmarks": "ALL",
@@ -1450,6 +1825,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "530011"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "ATCHUTPURAMATCHUTAPURAM",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "530011"
+      },
       "modernbert": {
         "house_details": "ATCHUTPURAM 1",
         "locality": "ATCHUTAPURAM ANA ALLI,",
@@ -1496,6 +1886,21 @@
         "poi": null,
         "street": "G N B ROAD",
         "subsubLocality": "SILPUKHURI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781003"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "JAYANTA COMMERCIAL COMPLEX",
+        "poi": null,
+        "street": "I",
+        "subsubLocality": "SILPUKHUR",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -1559,6 +1964,21 @@
         "state": "AS",
         "pincode": "781005"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Mercantile Tower",
+        "poi": null,
+        "street": "64 Udayachal Path GMCH Road",
+        "subsubLocality": "Christian Basti",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781005"
+      },
       "modernbert": {
         "building_name": "Mercantile Tower,",
         "house_details": " 64",
@@ -1606,6 +2026,21 @@
         "poi": "OPP. IDBI",
         "street": "G.S.ROAD",
         "subsubLocality": "ANANDA NAGAR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "GIRISH MANSION",
+        "poi": "IDBI",
+        "street": "ANAND",
+        "subsubLocality": "A NAGAR",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -1673,6 +2108,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515865"
       },
+      "tinybert": {
+        "houseNumber": "1-9",
+        "houseName": null,
+        "poi": null,
+        "street": "c colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Rangasamudram",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515865"
+      },
       "modernbert": {
         "landmarks": " colony angasamudram Rangasamudram",
         "house_details": "-9, O,-1,",
@@ -1724,6 +2174,21 @@
         "locality": "Rolugunta",
         "village": "Butchampeta",
         "subDistrict": "Ramalayam",
+        "district": "ANAKAPALLI",
+        "city": "Visakhapatnam",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531116"
+      },
+      "tinybert": {
+        "houseNumber": "5-1/",
+        "houseName": null,
+        "poi": "layam",
+        "street": "G",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Rolugunta",
+        "village": null,
+        "subDistrict": null,
         "district": "ANAKAPALLI",
         "city": "Visakhapatnam",
         "state": "ANDHRA PRADESH",
@@ -1786,6 +2251,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515765"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": "MRO opposite",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Kam",
+        "village": "badur",
+        "subDistrict": null,
+        "district": "nta",
+        "city": "Anantapur",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515765"
+      },
       "modernbert": {
         "locality": "Anantapur ANANTHAPUR, Kambadur, anantapur ANANTHAPURAM",
         "state": " Andhra Pradesh ANDHRA PRADESH,",
@@ -1834,6 +2314,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "Rajahmundry Rajahmundry",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533103"
+      },
+      "tinybert": {
+        "houseNumber": "46-24-6",
+        "houseName": null,
+        "poi": null,
+        "street": "praksahanagar",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Rajahmundry",
         "village": null,
         "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
@@ -1898,6 +2393,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515401"
       },
+      "tinybert": {
+        "houseNumber": "2-50 B",
+        "houseName": null,
+        "poi": null,
+        "street": "C COLONY",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Mainapuram",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": "ANANTHAPUR",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515401"
+      },
       "modernbert": {
         "locality": "Main ur ANANTHAP ANANTHAPURAM ,",
         "sub_locality": "UR,",
@@ -1949,6 +2459,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "AMBARI",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781003"
+      },
+      "tinybert": {
+        "houseNumber": "HOUSE NO-77",
+        "houseName": "SHIVSHAKTI MANDIR COMPLEX",
+        "poi": null,
+        "street": "AMBARI LAMB ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "AM",
         "village": null,
         "subDistrict": null,
         "district": null,
@@ -2011,6 +2536,21 @@
         "state": "AS",
         "pincode": "781009"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Kumudini Apartment",
+        "poi": null,
+        "street": "F.A. Road",
+        "subsubLocality": "para",
+        "subLocality": null,
+        "locality": "Kumar",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781009"
+      },
       "modernbert": {
         "building_name": " Kumudini Apartment",
         "locality": " Kumarpara, wa",
@@ -2060,6 +2600,21 @@
         "locality": "BAGHARBORI",
         "village": null,
         "subDistrict": "PS DISPUR",
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781037"
+      },
+      "tinybert": {
+        "houseNumber": "HOUSE NO.11",
+        "houseName": "ANGEL COMPLEX",
+        "poi": null,
+        "street": "NABAJ",
+        "subsubLocality": "PANJABARI",
+        "subLocality": null,
+        "locality": "SPUR",
+        "village": null,
+        "subDistrict": null,
         "district": "Kamrup",
         "city": "GUWAHATI",
         "state": "AS",
@@ -2121,6 +2676,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531113"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "MAKAVARAPALEM",
+        "village": "MAKAVARAPALEM",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531113"
+      },
       "modernbert": {
         "building_name": "MAKAVARAPALEM MAKAVARAPALEM 1",
         "landmarks": ",-",
@@ -2171,6 +2741,21 @@
         "locality": "kanekal mandal",
         "village": "Ganigera",
         "subDistrict": "o",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515871"
+      },
+      "tinybert": {
+        "houseNumber": "00",
+        "houseName": null,
+        "poi": null,
+        "street": "c colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "kanekal",
+        "village": null,
+        "subDistrict": "mandal",
         "district": "ANANTHAPURAMU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -2232,6 +2817,21 @@
         "state": "CH",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "254",
+        "houseName": "SHIVALIK ENCLAVE",
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": "C",
+        "locality": "NA",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "254,",
         "building_name": " SHIVALIK ENCLAVE",
@@ -2286,6 +2886,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515305"
       },
+      "tinybert": {
+        "houseNumber": "1/41",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Basavanahalli",
+        "village": "Ward",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515305"
+      },
       "modernbert": {
         "locality": "Basavanahalli,Amarapuram,",
         "house_details": "1/41,",
@@ -2334,6 +2949,21 @@
         "street": null,
         "subsubLocality": null,
         "subLocality": "REHABARI",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "NIRMAL SAGAR APARTMENTS",
+        "poi": null,
+        "street": "REHAB",
+        "subsubLocality": "ARI",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -2396,6 +3026,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515455"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Korivipalli",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": "Anantapur",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515455"
+      },
       "modernbert": {
         "landmarks": "K ip apur",
         "road": "oriv alli Singanamala Anant Korivipalli Singanamala Anantapur,-1",
@@ -2450,6 +3095,21 @@
         "district": null,
         "city": "CHANDIGARH",
         "state": "CH",
+        "pincode": "160047"
+      },
+      "tinybert": {
+        "houseNumber": "# 857",
+        "houseName": "SHIVALIK SOCIETY",
+        "poi": null,
+        "street": "SECTOR 49A",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
         "pincode": "160047"
       },
       "modernbert": {
@@ -2508,6 +3168,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515761"
       },
+      "tinybert": {
+        "houseNumber": "1-66",
+        "houseName": null,
+        "poi": null,
+        "street": "C COLANY",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "kalyanadurgam",
+        "village": "KO",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515761"
+      },
       "modernbert": {
         "building_name": "C COLANY",
         "landmarks": "alyanadurgam",
@@ -2550,6 +3225,21 @@
         "pincode": "500082"
       },
       "qwen": {
+        "houseNumber": "6-3-1109/A/1",
+        "houseName": "NAVABHARAT CHAMBERS",
+        "poi": null,
+        "street": "RAJAHBAVAN ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD-82A",
+        "state": "Telangana",
+        "pincode": "500082"
+      },
+      "tinybert": {
         "houseNumber": "6-3-1109/A/1",
         "houseName": "NAVABHARAT CHAMBERS",
         "poi": null,
@@ -2621,6 +3311,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "PLOT NO. 70",
+        "houseName": "TOWER",
+        "poi": "REJ ETERNIA INDUSTRIAL",
+        "street": "AREA 1",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "PLOT NO. 70, LEVEL 4,",
         "building_name": " T  A J",
@@ -2676,6 +3381,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515305"
       },
+      "tinybert": {
+        "houseNumber": "7-92",
+        "houseName": null,
+        "poi": null,
+        "street": "C Colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "hirethurpi",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515305"
+      },
       "modernbert": {
         "landmarks": "C Colony, hirethurpi, Karikera",
         "house_details": "7-92, B,-1,",
@@ -2718,6 +3438,21 @@
         "pincode": "781004"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "McDONALD TOWER",
+        "poi": null,
+        "street": "G. S. ROAD",
+        "subsubLocality": "BHANGAGARH",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781004"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "McDONALD TOWER",
         "poi": null,
@@ -2786,6 +3521,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531040"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Gathurmunda",
+        "village": "nchingi Puttu",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531040"
+      },
       "modernbert": {
         "locality": "M ingiput",
         "landmarks": "unch  SITHARAMA JU",
@@ -2828,6 +3578,21 @@
         "pincode": "781005"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "Shankar Complex",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "Christian Basti",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "Shankar Complex",
         "poi": null,
@@ -2896,6 +3661,21 @@
         "state": "AS",
         "pincode": "786125"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SHYAM BHAWAN",
+        "poi": null,
+        "street": "JALAN GALI",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "TINSUKIA",
+        "village": null,
+        "subDistrict": null,
+        "district": "Tinsukia",
+        "city": null,
+        "state": "AS",
+        "pincode": "786125"
+      },
       "modernbert": {
         "building_name": "C  RAJ KUMAR MITTAL,",
         "locality": " SHYAM BHAWAN JALAN GALI, NE  TINSUKIA , insukia Un",
@@ -2952,6 +3732,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "House No. 6028",
+        "houseName": "Modern",
+        "poi": "Housing Complex",
+        "street": null,
+        "subsubLocality": "Manimaj",
+        "subLocality": "ra",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "House No. 6028",
         "building_name": " Modern Housing Complex,Man",
@@ -2994,6 +3789,21 @@
         "pincode": "781021"
       },
       "qwen": {
+        "houseNumber": "D-3",
+        "houseName": "USHA COURT",
+        "poi": null,
+        "street": "R G B ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781021"
+      },
+      "tinybert": {
         "houseNumber": "D-3",
         "houseName": "USHA COURT",
         "poi": null,
@@ -3063,6 +3873,21 @@
         "state": "AS",
         "pincode": "781006"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Rajdhani Apartments",
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781006"
+      },
       "modernbert": {
         "building_name": "Rajdhani Apartments",
         "locality": " Guwahati , Un",
@@ -3113,6 +3938,21 @@
         "subDistrict": null,
         "district": "Jorhat",
         "city": "Jorhat",
+        "state": "AS",
+        "pincode": "785001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "RANJAN BHAWAN",
+        "poi": null,
+        "street": "J.B ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "JORHAT",
+        "village": null,
+        "subDistrict": null,
+        "district": "Jorhat",
+        "city": null,
         "state": "AS",
         "pincode": "785001"
       },
@@ -3171,6 +4011,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "# 6401",
+        "houseName": "AWHO COMPLEX",
+        "poi": null,
+        "street": "RAJIV VIHAR",
+        "subsubLocality": "MANI",
+        "subLocality": "MAJRA",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "# 6401,",
         "building_name": " AWHO COMPLEX",
@@ -3226,6 +4081,21 @@
         "state": "CH",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "FLAT NO 1512 II",
+        "houseName": "PSIEC SOCIETY",
+        "poi": null,
+        "street": "SECTOR 51B",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "building_name": "PSIEC SOCIETY ,",
         "house_details": " FLAT NO 1512 I",
@@ -3278,6 +4148,21 @@
         "locality": "chinthavandlapalli",
         "village": "Pendlimarri",
         "subDistrict": "kotha sangatipalli",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516216"
+      },
+      "tinybert": {
+        "houseNumber": "2/386",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "chinthavandlapalli",
+        "village": "Pendlimarri",
+        "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -3340,6 +4225,21 @@
         "state": "AS",
         "pincode": "785640"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "HANSARAJ BHAWAN STATION",
+        "poi": null,
+        "street": "CHAR",
+        "subsubLocality": "IALI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "SIVASAGAR",
+        "state": "AS",
+        "pincode": "785640"
+      },
       "modernbert": {
         "building_name": "HANSARAJ BHAWAN STATION CHARIALI,",
         "road": " A.T.ROAD",
@@ -3388,6 +4288,21 @@
         "locality": "devarapalli",
         "village": "devarapalli maredumilli",
         "subDistrict": "Maredumilli",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533295"
+      },
+      "tinybert": {
+        "houseNumber": "2-61",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "devarapalli",
+        "village": null,
+        "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -3450,6 +4365,21 @@
         "state": "AS",
         "pincode": "788001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "DAS COMPLEX",
+        "poi": null,
+        "street": "SHYAMA PRASAD ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "CACHAR",
+        "village": null,
+        "subDistrict": null,
+        "district": "Cachar",
+        "city": "SILCHAR",
+        "state": "AS",
+        "pincode": "788001"
+      },
       "modernbert": {
         "floor": "2ND FLOOR",
         "building_name": " DAS COMPLEX,",
@@ -3505,6 +4435,21 @@
         "district": null,
         "city": "CHANDIGARH",
         "state": "CH",
+        "pincode": "160047"
+      },
+      "tinybert": {
+        "houseNumber": "HOUSE NO 2182",
+        "houseName": "PEPSU SOCIETY",
+        "poi": null,
+        "street": "SECTOR 50-C",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
         "pincode": "160047"
       },
       "modernbert": {
@@ -3563,6 +4508,21 @@
         "state": "Chandigarh",
         "pincode": "160012"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Microsoft Spic Centre",
+        "poi": null,
+        "street": "PEC",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160012"
+      },
       "modernbert": {
         "building_name": "Microsoft Spic Centre",
         "floor": " Ist Floor,PEC",
@@ -3619,6 +4579,21 @@
         "state": "AS",
         "pincode": "781352"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SAHID BHAWAN",
+        "poi": "OF",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "BARPETA",
+        "village": null,
+        "subDistrict": null,
+        "district": "Barpeta",
+        "city": null,
+        "state": "AS",
+        "pincode": "781352"
+      },
       "modernbert": {
         "building_name": "IN FRONT OF SAH  B WAN",
         "landmarks": "ID HA  P.O",
@@ -3667,6 +4642,21 @@
         "subLocality": null,
         "locality": "Gooty",
         "village": "RS",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515402"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": "RS",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Gooty",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -3728,6 +4718,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515401"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "AT-GANGADA",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515401"
+      },
       "modernbert": {
         "locality": "GANG DERIKI, Gangada Naugaon,Tentoi  Gangada Naugaon,Tentoi",
         "landmarks": "ADA GANGADA, DERIKI,",
@@ -3769,6 +4774,21 @@
         "pincode": "515871"
       },
       "qwen": {
+        "houseNumber": "5-122",
+        "houseName": null,
+        "poi": null,
+        "street": "Chinmaya nagar",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Raptadu",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": "Anantapuram",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515871"
+      },
+      "tinybert": {
         "houseNumber": "5-122",
         "houseName": null,
         "poi": null,
@@ -3839,6 +4859,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531116"
       },
+      "tinybert": {
+        "houseNumber": "1-36 J",
+        "houseName": null,
+        "poi": "AGRAHARAM POST",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": "RO",
+        "subDistrict": "LUGUNTA MANDALAMS",
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531116"
+      },
       "modernbert": {
         "landmarks": "/  RONGALA ARA RA UG  MANDAL /  RONGALA ESWARA RAO,1 36",
         "road": "1-36 J P AGRAHARAM POST, -  J P AGRAHARAM POST,",
@@ -3895,6 +4930,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531029"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "rai",
+        "village": "madugula",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531029"
+      },
       "modernbert": {
         "landmarks": " gemmeli post,  G madugula post,",
         "road": "Thoka Rai, Toka,-1",
@@ -3937,6 +4987,21 @@
         "pincode": "535145"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "SH 39",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Anantagiri Mountain Range",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "535145"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": null,
         "poi": null,
@@ -4007,6 +5072,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "ARPAN ENTERPRISE",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "building_name": "C/O ARPAN ENTERPRISE SHIMLA PLAZA,",
         "locality": " ULUBARI GUWAHATI , Kamrup Unclassified"
@@ -4059,6 +5139,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515767"
       },
+      "tinybert": {
+        "houseNumber": "2-54",
+        "houseName": null,
+        "poi": null,
+        "street": "colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Brahmasamudram",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515767"
+      },
       "modernbert": {
         "landmarks": "colony  BC colony Brahmasamudram",
         "house_details": "2-54, BC",
@@ -4100,6 +5195,21 @@
         "pincode": "781007"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "Surya Tower",
+        "poi": null,
+        "street": "B. Baruah Road",
+        "subsubLocality": "Ulubari",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "Surya Tower",
         "poi": null,
@@ -4168,6 +5278,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515763"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "BELUGUPPA",
+        "village": "NARASAPURAM",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": "ANANTAPUR",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515763"
+      },
       "modernbert": {
         "city": "BELUGUPPA",
         "road": " ANANTAPUR1 AM,-1",
@@ -4217,6 +5342,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "Gopala",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516216"
+      },
+      "tinybert": {
+        "houseNumber": "1/103",
+        "houseName": null,
+        "poi": null,
+        "street": "CK DINNE",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Puram",
         "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
@@ -4279,6 +5419,21 @@
         "state": "Chandigarh",
         "pincode": "160022"
       },
+      "tinybert": {
+        "houseNumber": "H. No. 3130 P",
+        "houseName": "Level II",
+        "poi": null,
+        "street": "Sector 22 D",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160022"
+      },
       "modernbert": {
         "house_details": "H. No. 3130 P,",
         "floor": " Level II,",
@@ -4328,6 +5483,21 @@
         "street": "GHY-1, P2Y",
         "subsubLocality": "Tokobari Satra",
         "subLocality": "Paltanbazar",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Akash Complex",
+        "poi": null,
+        "street": "Tokobari Satra",
+        "subsubLocality": null,
+        "subLocality": "tanbazar",
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -4392,6 +5562,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516247"
       },
+      "tinybert": {
+        "houseNumber": "2/60",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "PURAM",
+        "village": "RAM",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516247"
+      },
       "modernbert": {
         "city": "PURAM,",
         "landmarks": " MALL AM Madhav  MALLESWARA,-1,",
@@ -4449,6 +5634,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515812"
       },
+      "tinybert": {
+        "houseNumber": "3/125",
+        "houseName": null,
+        "poi": null,
+        "street": "Vajrakruru",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Cha",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515812"
+      },
       "modernbert": {
         "house_details": "3/125",
         "road": " Vajrakruru 15 Chab",
@@ -4491,6 +5691,21 @@
         "pincode": "781007"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "SHIMA PLAZA",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "ULUBARI CHARIALI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "SHIMA PLAZA",
         "poi": null,
@@ -4559,6 +5774,21 @@
         "state": "AS",
         "pincode": "781008"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "DUTTA COMPLEX",
+        "poi": null,
+        "street": "A. K. AZAD ROAD",
+        "subsubLocality": "REHABARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
       "modernbert": {
         "building_name": "DUTTA COMPLEX",
         "road": " A. K. AZAD ROAD,",
@@ -4606,6 +5836,21 @@
         "subLocality": null,
         "locality": "Chennampalli",
         "village": "Chennampalle",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516502"
+      },
+      "tinybert": {
+        "houseNumber": "9-2-51",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Chennampalli",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -4667,6 +5912,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "ANNADA BHAWAN",
+        "poi": null,
+        "street": "G.S. ROAD",
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI-",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "floor": "1st FLOOR,",
         "building_name": " ANNADA BHAWAN",
@@ -4716,6 +5976,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "Babe",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515571"
+      },
+      "tinybert": {
+        "houseNumber": "9/70",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Naik Thanda",
         "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
@@ -4773,6 +6048,21 @@
         "subsubLocality": "CHANDAN NAGAR",
         "subLocality": "SURVEY",
         "locality": "BELTOLA",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781028"
+      },
+      "tinybert": {
+        "houseNumber": "HOUSE NO-12",
+        "houseName": "MONGRI TOWER",
+        "poi": null,
+        "street": "JEUTI PATH",
+        "subsubLocality": "NAGAR",
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "Kamrup",
@@ -4838,6 +6128,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516214"
       },
+      "tinybert": {
+        "houseNumber": "00",
+        "houseName": null,
+        "poi": null,
+        "street": "pet",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "devalam",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516214"
+      },
       "modernbert": {
         "house_details": "00, devalam",
         "building_name": " peta",
@@ -4896,6 +6201,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 24",
+        "houseName": "NAC",
+        "poi": "SHIVALIK",
+        "street": null,
+        "subsubLocality": "MANI MAJRA",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 24,",
         "floor": " IST FLOOR",
@@ -4945,6 +6265,21 @@
         "street": "Dr. B.Baruah Road",
         "subsubLocality": null,
         "subLocality": "Ulubari",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Royale Arcade",
+        "poi": null,
+        "street": "Dr. B.Baruah Road",
+        "subsubLocality": "Ulubari",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -5008,6 +6343,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 5210/2",
+        "houseName": "MODERN",
+        "poi": "HOUSING COMPLEX",
+        "street": null,
+        "subsubLocality": "MANI",
+        "subLocality": "MA",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 5210/2",
         "building_name": " MODERN HOUSING COMPLEX, MAN",
@@ -5059,6 +6409,21 @@
         "locality": "ARABEERU VILLAGE",
         "village": "MAKAVARAM PANCHAYATH",
         "subDistrict": "ARABEERU MANDAL",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531040"
+      },
+      "tinybert": {
+        "houseNumber": "5-14",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": "U",
+        "subDistrict": "INGIPUTTU MANDAL",
         "district": "ALLURI SITHARAMA RAJU",
         "city": "VISAKHAPATNAM",
         "state": "ANDHRA PRADESH",
@@ -5122,6 +6487,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "535145"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": "KOTA SOTYDA RS BO",
+        "street": "S",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "535145"
+      },
       "modernbert": {
         "house_details": "S KOTA SOTYDA RS BO,-1,",
         "landmarks": "ALLURI SITHARAMA RAJU",
@@ -5177,6 +6557,21 @@
         "state": "AS",
         "pincode": "781008"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "AASTHA APARTMENT",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "SUHAGPUR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
       "modernbert": {
         "building_name": "AASTHA APARTMENT",
         "locality": " SUHAGPUR, REHABARI GUWA AT  ,",
@@ -5221,6 +6616,21 @@
         "poi": null,
         "street": "G S Road",
         "subsubLocality": "Christian Basti",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Mega Plaza",
+        "poi": null,
+        "street": "Christian Basti G S Road",
+        "subsubLocality": null,
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -5284,6 +6694,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515556"
       },
+      "tinybert": {
+        "houseNumber": "5-9",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "puttla vaandla palli",
+        "village": "tla vaandlapalli",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515556"
+      },
       "modernbert": {
         "landmarks": "puttla vaandla palli,  puttla vaandlapalli, Th 15",
         "road": "ummala",
@@ -5336,6 +6761,21 @@
         "locality": null,
         "village": "Sebuguda",
         "subDistrict": "Munchingi",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531040"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": "Sebuguda",
+        "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -5397,6 +6837,21 @@
         "state": "AS",
         "pincode": "781131"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "RANI",
+        "poi": "INDUSTRIAL AREA",
+        "street": null,
+        "subsubLocality": "RANI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781131"
+      },
       "modernbert": {
         "building_name": "RANI INDUSTRIAL AREA",
         "locality": " RANI GUWAHATI ,",
@@ -5446,6 +6901,21 @@
         "subLocality": null,
         "locality": "Mavinamardhanahalli",
         "village": "Mavinamardhanahalli",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515751"
+      },
+      "tinybert": {
+        "houseNumber": "236",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Mavinamardhanahalli",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -5509,6 +6979,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516193"
       },
+      "tinybert": {
+        "houseNumber": "00",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "akkampeta",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516193"
+      },
       "modernbert": {
         "house_details": "00, akkampeta , akk",
         "landmarks": ", itugullapadu,",
@@ -5555,6 +7040,21 @@
         "houseName": "DR GOPAL CHANDRA SARMA BLDG",
         "poi": null,
         "street": "KHARGULI ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "ASSAM",
+        "pincode": "781004"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "DR GOPAL CHANDRA SARMA BLDGKHARGULI ROAD",
         "subsubLocality": null,
         "subLocality": null,
         "locality": null,
@@ -5618,6 +7118,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531083"
       },
+      "tinybert": {
+        "houseNumber": "4-43",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "AM",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANA",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531083"
+      },
       "modernbert": {
         "city": "MANDALAM,",
         "landmarks": "VISAKHAPATNAMS/O BIKKOLU NAGA RAJU,",
@@ -5669,6 +7184,21 @@
         "subLocality": null,
         "locality": "Talla Proddatur",
         "village": "Thallaproddatur",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516474"
+      },
+      "tinybert": {
+        "houseNumber": "4/90",
+        "houseName": null,
+        "poi": null,
+        "street": "Talla Proddatur",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "aProddatur",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -5731,6 +7261,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": "A102",
+        "houseName": "BR TOWER",
+        "poi": null,
+        "street": "21",
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "house_details": "A102",
         "building_name": " BR TOWER",
@@ -5779,6 +7324,21 @@
         "subLocality": null,
         "locality": "pillalapalli pillalapalli",
         "village": "pillalapalli",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515763"
+      },
+      "tinybert": {
+        "houseNumber": "3/464",
+        "houseName": null,
+        "poi": null,
+        "street": "s c colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "pillalapalli pillalapalli",
+        "village": "alapalle",
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -5841,6 +7401,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531077"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Bheemavaram",
+        "village": "ttampadu",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531077"
+      },
       "modernbert": {
         "road": " VISAKHAPATNAMMDR134,",
         "locality": " Bakuru,",
@@ -5888,6 +7463,21 @@
         "street": "G. S. ROAD",
         "subsubLocality": null,
         "subLocality": "DISPUR",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "JAIN COMPLEX",
+        "poi": null,
+        "street": "G. S. ROAD",
+        "subsubLocality": "DISPUR",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -5951,6 +7541,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516128"
       },
+      "tinybert": {
+        "houseNumber": "3/34-a",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": "pena",
+        "subDistrict": "galuru mandal",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516128"
+      },
       "modernbert": {
         "landmarks": "H W kattavaripallipost, penagaluru mandal Itimarpuram",
         "house_details": "3/34-a,",
@@ -5993,6 +7598,21 @@
         "pincode": "781007"
       },
       "qwen": {
+        "houseNumber": "8",
+        "houseName": "Express Complex",
+        "poi": null,
+        "street": "Dr. B. Baruah Road",
+        "subsubLocality": "Ulubari",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
         "houseNumber": "8",
         "houseName": "Express Complex",
         "poi": null,
@@ -6060,6 +7680,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515641"
       },
+      "tinybert": {
+        "houseNumber": "3-36 oc",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "coliny Parvathadeaverapalli",
+        "village": "aga",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515641"
+      },
       "modernbert": {
         "landmarks": "coliny Parvathadeaverapalli",
         "road": " Kanaganapalli3-36 oc,-",
@@ -6117,6 +7752,21 @@
         "state": "CH",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "SCO 850",
+        "houseName": "SHIVALIK ENCLAVE",
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "SCO 850, SH",
         "building_name": "IVALIK ENCLAVE,",
@@ -6171,6 +7821,21 @@
         "state": "AS",
         "pincode": "781352"
       },
+      "tinybert": {
+        "houseNumber": "NO. 10",
+        "houseName": "BHAKTAR",
+        "poi": null,
+        "street": "DOVA BAZAR",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "NALIGAON",
+        "village": null,
+        "subDistrict": null,
+        "district": "Barpeta",
+        "city": null,
+        "state": "AS",
+        "pincode": "781352"
+      },
       "modernbert": {
         "building_name": "BHAKTAR DOVA BAZAR, BLOCK",
         "house_details": " NO. 10",
@@ -6219,6 +7884,21 @@
         "subLocality": null,
         "locality": "SANAPA VILLAGE",
         "village": "SANAPA",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515751"
+      },
+      "tinybert": {
+        "houseNumber": "NO 1-140",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "SANAPA",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -6282,6 +7962,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SIMA PLAZA",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "building_name": "SIMA PLAZA,",
         "floor": " 4TH FLOOR,",
@@ -6334,6 +8029,21 @@
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": "Anantapur",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515865"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "MDR",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Muradi",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
         "state": "ANDHRA PRADESH",
         "pincode": "515865"
       },
@@ -6394,6 +8104,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531040"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Kinchaiputtu",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531040"
+      },
       "modernbert": {
         "state": "inch uttuPradesh, ADESH",
         "house_details": "AKH AT 1,",
@@ -6437,6 +8162,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "G. M. TOWER",
+        "poi": null,
+        "street": "M. S. ROAD",
+        "subsubLocality": "FANCY BAZAR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "G. M. TOWER",
         "poi": null,
@@ -6506,6 +8246,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "533238"
       },
+      "tinybert": {
+        "houseNumber": "1-10",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Ravulapalem",
+        "village": "Ra",
+        "subDistrict": "vulapalem Mandal",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533238"
+      },
       "modernbert": {
         "locality": "Ravulapalem avulapalem M ,  S",
         "landmarks": "andal",
@@ -6563,6 +8318,21 @@
         "state": "CH",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO.5055/3",
+        "houseName": "MODERN",
+        "poi": "HOUSING COMPLEX",
+        "street": null,
+        "subsubLocality": "MANI",
+        "subLocality": "MAJRA",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "HOUSE NO.5055/3",
         "building_name": " MODERN HOUSING COMPLEX, MAN",
@@ -6611,6 +8381,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "BONTHALAPALLI",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515571"
+      },
+      "tinybert": {
+        "houseNumber": "4-84-B",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "THANAKALLU",
         "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
@@ -6674,6 +8459,21 @@
         "state": "AS",
         "pincode": "786001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "Anand Plaza",
+        "poi": null,
+        "street": "K",
+        "subsubLocality": "hal",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Di",
+        "city": null,
+        "state": "AS",
+        "pincode": "786001"
+      },
       "modernbert": {
         "floor": "1st Floor",
         "building_name": " Anand Plaza",
@@ -6730,6 +8530,21 @@
         "state": "AS",
         "pincode": "786611"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "AZIZ",
+        "poi": "BAGH TEA ESTATE",
+        "street": null,
+        "subsubLocality": "GARH",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "UGARH",
+        "city": "RAJ",
+        "state": "AS",
+        "pincode": "786611"
+      },
       "modernbert": {
         "building_name": "AZIZBAGH TEA ESTATE, RAJGARH H",
         "landmarks": " DIBRUGAR",
@@ -6778,6 +8593,21 @@
         "locality": "Dodagatta",
         "village": "Dodagatta",
         "subDistrict": "Kalyandurgam",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515761"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "KalyandurgamDodagatta",
+        "village": "Dodaga",
+        "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -6839,6 +8669,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "Flat No.1204",
+        "houseName": "NEWLIGHT COOPERATIVE GROUP",
+        "poi": "HOUSING",
+        "street": "LIMITED",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "Flat No.1204,",
         "building_name": "NEWLIGHT COOPERATIVE GROUP HOUSING SOCIETY LIMITED,",
@@ -6887,6 +8732,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "K N Palli Kumbaranagehalli",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515305"
+      },
+      "tinybert": {
+        "houseNumber": "1-205b",
+        "houseName": null,
+        "poi": null,
+        "street": "C Colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
@@ -6950,6 +8810,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515435"
       },
+      "tinybert": {
+        "houseNumber": "NO 4 3",
+        "houseName": null,
+        "poi": null,
+        "street": "CHINNA JALAL",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "APURAM",
+        "village": "SING",
+        "subDistrict": "ANAMALA MANDAL",
+        "district": "ANANTHAPURAMU",
+        "city": "ANANTAPUR",
+        "state": "ANDHRA PRADESH",
+        "pincode": "515435"
+      },
       "modernbert": {
         "house_details": "NO 4 3",
         "road": " CHINNA JALALAPURAM,SING NAMALA",
@@ -7005,6 +8880,21 @@
         "subDistrict": null,
         "district": "ANAKAPALLI",
         "city": "EAST GODAVARI",
+        "state": "ANDHRA PRADESH",
+        "pincode": "533406"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "MDR145",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "dapudi",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": "AVARI",
         "state": "ANDHRA PRADESH",
         "pincode": "533406"
       },
@@ -7065,6 +8955,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531028"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "URBANLB PATNAM",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": "VISAKAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531028"
+      },
       "modernbert": {
         "house_details": "VIS",
         "road": "AKAPATNAM URBANLB PATNAM,-1,",
@@ -7113,6 +9018,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "ZOO-NARENGI ROAD",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781024"
+      },
+      "tinybert": {
+        "houseNumber": "FLAT NO-3A",
+        "houseName": "NABADOY APARTMENT",
+        "poi": null,
+        "street": "CHINAKI PATH",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "Kamrup",
@@ -7177,6 +9097,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515401"
       },
+      "tinybert": {
+        "houseNumber": "8/1300",
+        "houseName": null,
+        "poi": null,
+        "street": "AMBEDKAR NAGAR",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "GootyS",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515401"
+      },
       "modernbert": {
         "landmarks": "AM ootyS/O BOYA SUNKANNA,",
         "house_details": "8/1300,-1,",
@@ -7232,6 +9167,21 @@
         "state": "AS",
         "pincode": "781021"
       },
+      "tinybert": {
+        "houseNumber": "Flat 5B",
+        "houseName": "Luhit Apartment",
+        "poi": null,
+        "street": "R.G.B.Road",
+        "subsubLocality": "Tiniali",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781021"
+      },
       "modernbert": {
         "house_details": "Flat 5B,",
         "floor": " 5th Floor,",
@@ -7276,6 +9226,21 @@
         "pincode": "781022"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "B.D. DAS MANSION",
+        "poi": null,
+        "street": "KANAKLATA PATH",
+        "subsubLocality": "RUKMINIGAON",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781022"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "B.D. DAS MANSION",
         "poi": null,
@@ -7344,6 +9309,21 @@
         "state": "AS",
         "pincode": "788710"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "SHANDHYA COMPLEX",
+        "poi": null,
+        "street": "STATION ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "GANJ",
+        "village": null,
+        "subDistrict": null,
+        "district": "Karimganj",
+        "city": "KARIM",
+        "state": "AS",
+        "pincode": "788710"
+      },
       "modernbert": {
         "building_name": "SHANDHYA COMPLEX,",
         "floor": " 2ND. FLOOR",
@@ -7385,6 +9365,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "AASTHA TOWER",
+        "poi": null,
+        "street": "C.K. ROAD",
+        "subsubLocality": "PANBAZAR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "AASTHA TOWER",
         "poi": null,
@@ -7453,6 +9448,21 @@
         "state": "AS",
         "pincode": "781007"
       },
+      "tinybert": {
+        "houseNumber": "B-2",
+        "houseName": "AASTHA PLAZA",
+        "poi": null,
+        "street": "G.S. ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
       "modernbert": {
         "building_name": "AASTHA PLAZA,",
         "floor": " 2nd FLOOR, B-2",
@@ -7502,6 +9512,21 @@
         "subLocality": null,
         "locality": "Kanampalli",
         "village": "Garladinne",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515731"
+      },
+      "tinybert": {
+        "houseNumber": "1-213",
+        "houseName": null,
+        "poi": null,
+        "street": "Ga",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Kanampalli",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -7564,6 +9589,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516217"
       },
+      "tinybert": {
+        "houseNumber": "0",
+        "houseName": null,
+        "poi": null,
+        "street": "Var",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "varikuntla",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516217"
+      },
       "modernbert": {
         "house_details": "0, vari unt",
         "landmarks": "k la, Varikunta0, varikuntla, Var",
@@ -7611,6 +9651,21 @@
         "poi": null,
         "street": "R.G. BARUAH ROAD",
         "subsubLocality": "JONALI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781024"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "ASHIRWAD ENCLAVE",
+        "poi": null,
+        "street": "JONALI",
+        "subsubLocality": null,
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -7676,6 +9731,21 @@
         "state": "CH",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 309",
+        "houseName": "ADVOCATE ENCLAVE",
+        "poi": null,
+        "street": "SECTOR 49A",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 309",
         "building_name": " ADVOCATE ENCLAVE",
@@ -7731,6 +9801,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531024"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "VANTLAMAMI",
+        "village": "DIVANTLAMAMIDI",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531024"
+      },
       "modernbert": {
         "house_details": "V ,",
         "building_name": "ANTLAMAMIDIVANTLAMAMIDI,-1",
@@ -7777,6 +9862,21 @@
         "houseNumber": "46-53-7/4",
         "houseName": null,
         "poi": "no 4 swathi apts BS Layout",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "530013"
+      },
+      "tinybert": {
+        "houseNumber": "no 4",
+        "houseName": "swathi apt",
+        "poi": "s BS Layout",
         "street": null,
         "subsubLocality": null,
         "subLocality": null,
@@ -7845,6 +9945,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515870"
       },
+      "tinybert": {
+        "houseNumber": "3-121",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "bommanahal",
+        "village": "LLUHOLA",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515870"
+      },
       "modernbert": {
         "road": "ANANTHAPURS/O PATIL RAJANNA GOWD LATE, -  KALLUHOLA,",
         "house_details": "3 121",
@@ -7901,6 +10016,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "SHOP NO. 557",
+        "houseName": "KESHURAM COMPLEX",
+        "poi": null,
+        "street": "SECTOR-45C",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "SHOP NO. 557,",
         "building_name": " KESHURAM COMPLEX,",
@@ -7950,6 +10080,21 @@
         "subLocality": null,
         "locality": "nagar",
         "village": "Proddatur",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516360"
+      },
+      "tinybert": {
+        "houseNumber": "7/2630",
+        "houseName": null,
+        "poi": null,
+        "street": "a",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "nagar",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -8012,6 +10157,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515408"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Yadiki Yadiki YadikiYadiki",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515408"
+      },
       "modernbert": {
         "building_name": "Yadiki Yadiki YadikiYadiki Yadiki Yadiki,-1,",
         "locality": "ANANTHAPURAMU",
@@ -8067,6 +10227,21 @@
         "state": "Chandigarh",
         "pincode": "160003"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 63",
+        "houseName": "TRIBUNE SOCIETY COMPLEX",
+        "poi": null,
+        "street": "RAIPUR KHURAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160003"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 63,",
         "building_name": " TRIBUNE SOCIETY COMPLEX",
@@ -8117,6 +10292,21 @@
         "subLocality": null,
         "locality": "Ankampalli Beluguppa",
         "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515741"
+      },
+      "tinybert": {
+        "houseNumber": "2-85",
+        "houseName": null,
+        "poi": null,
+        "street": "c colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Ankampalli Bel",
+        "village": "ugup",
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -8179,6 +10369,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 14",
+        "houseName": "SANGAM ENCLAVE",
+        "poi": null,
+        "street": "SECTOR 48-A",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 14,",
         "building_name": " SANGAM ENCLAVE",
@@ -8226,6 +10431,21 @@
         "poi": null,
         "street": "A.K.AZAD ROAD, REHABARI",
         "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
+      "tinybert": {
+        "houseNumber": "3A",
+        "houseName": "RISHAV PLAZA",
+        "poi": null,
+        "street": "A.K.AZAD ROAD",
+        "subsubLocality": "REHABARI",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -8292,6 +10512,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515405"
       },
+      "tinybert": {
+        "houseNumber": "4/11-B",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Peddavadagur",
+        "village": null,
+        "subDistrict": "dugur Vil",
+        "district": "Mandal",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515 405"
+      },
       "modernbert": {
         "locality": "adag  Peddavadugur Vil  Anantapur",
         "house_details": "D.No.4/11-B",
@@ -8342,6 +10577,21 @@
         "subLocality": null,
         "locality": null,
         "village": "DAMUNAPALLEDAMUNAPALLE",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531036"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "DAMUNAPALLED",
+        "village": "AMUNAPALLE",
         "subDistrict": null,
         "district": "ANAKAPALLI",
         "city": null,
@@ -8404,6 +10654,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515701"
       },
+      "tinybert": {
+        "houseNumber": "a1/20",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "chakrayapeta",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515701"
+      },
       "modernbert": {
         "landmarks": "chakrayapeta singanamala ap",
         "house_details": "1/20, ak",
@@ -8457,6 +10722,21 @@
         "subDistrict": null,
         "district": null,
         "city": null,
+        "state": "AS",
+        "pincode": "785001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "INDU BHAWAN",
+        "poi": null,
+        "street": "MAHATAMA GANDHI ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "JORHAT",
         "state": "AS",
         "pincode": "785001"
       },
@@ -8514,6 +10794,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531040"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Pe",
+        "village": "ddaputtu",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531040"
+      },
       "modernbert": {
         "house_details": "ISAKHAPATNAM7GR4QJ9,",
         "locality": " Peddaputtu, ALLURI SITHARAMA RAJU",
@@ -8563,6 +10858,21 @@
         "subLocality": null,
         "locality": "khajipet",
         "village": "Thavvaripalle",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516203"
+      },
+      "tinybert": {
+        "houseNumber": "00",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "khajipet",
+        "village": null,
         "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
@@ -8624,6 +10934,21 @@
         "state": "CH",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "# 5947",
+        "houseName": "MODERN HOUSING COMPLEX",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "MANIMAJRA",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "# 5947",
         "building_name": " MODERN HOUSING COMPLEX",
@@ -8669,6 +10994,21 @@
         "poi": "ASTC Paltan Bazar",
         "street": null,
         "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781008"
+      },
+      "tinybert": {
+        "houseNumber": "30",
+        "houseName": "City Tower",
+        "poi": "ASTC Paltan",
+        "street": "Ba",
+        "subsubLocality": "zar",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -8733,6 +11073,21 @@
         "state": "Telangana",
         "pincode": "500034"
       },
+      "tinybert": {
+        "houseNumber": "FLAT NO.102",
+        "houseName": "SHILPA ARCADE",
+        "poi": null,
+        "street": "RAOD NO.3",
+        "subsubLocality": "BANJARAHILLS",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDRA",
+        "state": "Telangana",
+        "pincode": "500034"
+      },
       "modernbert": {
         "house_details": "FLAT NO.102,",
         "building_name": "SHILPA ARC ,",
@@ -8785,6 +11140,21 @@
         "subLocality": null,
         "locality": "madava rayuni palle",
         "village": "Madhavarayunipalle",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516228"
+      },
+      "tinybert": {
+        "houseNumber": "1-23-A",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "madava ray",
+        "village": "uni palle",
         "subDistrict": null,
         "district": "ANAKAPALLI",
         "city": null,
@@ -8848,6 +11218,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531029"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "B",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "heeram",
+        "village": "eeram village",
+        "subDistrict": "g madugula mandal MDR10",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531029"
+      },
       "modernbert": {
         "house_details": "53 29,",
         "pincode": "10 531029",
@@ -8897,6 +11282,21 @@
         "street": "C GOSWAMI ROAD",
         "subsubLocality": null,
         "subLocality": "PANBAZAR",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "H M TOWER",
+        "poi": null,
+        "street": "C",
+        "subsubLocality": "PANBAZAR",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -8961,6 +11361,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "Booth No. 74",
+        "houseName": "Manimajra Housing Complex",
+        "poi": "(M",
+        "street": "HC)",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "Booth No. 74",
         "building_name": " Manimajra Housing Complex",
@@ -9007,6 +11422,21 @@
         "street": "S.J. ROAD",
         "subsubLocality": null,
         "subLocality": "ATHGAON",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
+        "houseNumber": "202",
+        "houseName": "KEJRIWAL COMPLEX",
+        "poi": null,
+        "street": "S.J. ROAD",
+        "subsubLocality": "ATHGAON",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -9071,6 +11501,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531077"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": "Allamputtu",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531077"
+      },
       "modernbert": {
         "landmarks": "Bay  Mandal Taluk , All",
         "pincode": " 531077. 531077",
@@ -9125,6 +11570,21 @@
         "district": null,
         "city": "Chandigarh",
         "state": "Chandigarh",
+        "pincode": "160047"
+      },
+      "tinybert": {
+        "houseNumber": "SCO NO 623-624",
+        "houseName": "KESHO RAM COMPLEX",
+        "poi": null,
+        "street": "SECTOR 45-C",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
         "pincode": "160047"
       },
       "modernbert": {
@@ -9183,6 +11643,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515401"
       },
+      "tinybert": {
+        "houseNumber": "1-73",
+        "houseName": null,
+        "poi": null,
+        "street": "bc colony",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Nagasamudram",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515401"
+      },
       "modernbert": {
         "building_name": "bc colony",
         "landmarks": " Nagasamudram apuramu",
@@ -9232,6 +11707,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "BANJARAHILLS",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD",
+        "state": "Telangana",
+        "pincode": "500034"
+      },
+      "tinybert": {
+        "houseNumber": "6-3-350",
+        "houseName": null,
+        "poi": "JAR",
+        "street": "GANGA ESTATE ROADNO",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "JAR",
         "village": null,
         "subDistrict": null,
         "district": null,
@@ -9295,6 +11785,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "532461"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Ravupalli",
+        "village": "KAKULAMRa",
+        "subDistrict": "vupalli Village",
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "532461"
+      },
       "modernbert": {
         "locality": "Ravupalli,",
         "state": "ra ANDHRA PRADESH,",
@@ -9350,6 +11855,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515822"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "NARA",
+        "poi": "KONKA",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "NIMBAGAL",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "3116"
+      },
       "modernbert": {
         "city": "NIMBAGAL NTHAPURAMU,",
         "pincode": "3 515822",
@@ -9397,6 +11917,21 @@
         "houseName": "HANUMAN TOWER",
         "poi": null,
         "street": "ATHGAON S J ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "ASSAM",
+        "pincode": "781001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "HANUMAN TOWER",
+        "poi": null,
+        "street": "GAON",
         "subsubLocality": null,
         "subLocality": null,
         "locality": null,
@@ -9463,6 +11998,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "HOUSE NO. 315",
+        "houseName": "RC",
+        "poi": "S HOUSING BOARD SOCIETY",
+        "street": "SECTOR 48-A",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "HOUSE NO. 315,",
         "building_name": " RCS HOUSING BOARD SOCIETY",
@@ -9519,6 +12069,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515751"
       },
+      "tinybert": {
+        "houseNumber": "5-3",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Thopudurthy",
+        "village": "akur",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515751"
+      },
       "modernbert": {
         "house_details": "5-3, op 5-3, Thopudur",
         "landmarks": " Th udurthy, At ur  At thy,",
@@ -9568,6 +12133,21 @@
         "subsubLocality": null,
         "subLocality": "DISPUR",
         "locality": "GUWAHATI",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781006"
+      },
+      "tinybert": {
+        "houseNumber": "HOUSE",
+        "houseName": "CHANDAS TOWER",
+        "poi": null,
+        "street": "HATIGAON ROAD",
+        "subsubLocality": "DISPUR",
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": null,
@@ -9633,6 +12213,21 @@
         "state": "AS",
         "pincode": "781001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "RAM PRASAD COMPLEX",
+        "poi": null,
+        "street": "A.T. ROAD",
+        "subsubLocality": "CHATRIBARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
       "modernbert": {
         "building_name": "RAM PRASAD COMPLEX,",
         "floor": " 1ST FLOOR",
@@ -9686,6 +12281,21 @@
         "district": null,
         "city": "Chandigarh",
         "state": "Chandigarh",
+        "pincode": "160047"
+      },
+      "tinybert": {
+        "houseNumber": "FLAT NO-1535",
+        "houseName": "PUSHPAC COMPLEX",
+        "poi": null,
+        "street": "SECTOR-49/B",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
         "pincode": "160047"
       },
       "modernbert": {
@@ -9743,6 +12353,21 @@
         "state": "Chandigarh",
         "pincode": "160047"
       },
+      "tinybert": {
+        "houseNumber": "CABIN NO. 201",
+        "houseName": "KESHO RAM COMPLEX",
+        "poi": null,
+        "street": "BURAIL",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160047"
+      },
       "modernbert": {
         "house_details": "CABIN NO. 201, SCO NO. 623-624,",
         "building_name": " KESHO RAM COMPLEX BUR",
@@ -9792,6 +12417,21 @@
         "subLocality": null,
         "locality": "JAMUGUDA",
         "village": "Arukuvally",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531149"
+      },
+      "tinybert": {
+        "houseNumber": "8-74",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Arukuvally",
+        "village": null,
         "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
         "city": null,
@@ -9855,6 +12495,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531061"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Mulakothuru",
+        "village": "kivada",
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": "VISAKHAPATNAM",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531061"
+      },
       "modernbert": {
         "locality": " Gokivada,",
         "state": "hra Pradesh ANDHRA PRADESH,",
@@ -9910,6 +12565,21 @@
         "state": "AS",
         "pincode": "781008"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "M T TOWER",
+        "poi": null,
+        "street": "PAL",
+        "subsubLocality": "TAN",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781008"
+      },
       "modernbert": {
         "building_name": "M T TOWER,",
         "road": " PALTAN BAZAR G S ROAD",
@@ -9951,6 +12621,21 @@
         "pincode": "533436"
       },
       "qwen": {
+        "houseNumber": "3-5",
+        "houseName": null,
+        "poi": "Opp Police Station",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Rajavommangi",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533436"
+      },
+      "tinybert": {
         "houseNumber": "3-5",
         "houseName": null,
         "poi": "Opp Police Station",
@@ -10021,6 +12706,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515767"
       },
+      "tinybert": {
+        "houseNumber": "No:",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "IdhukalluH",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515767"
+      },
       "modernbert": {
         "landmarks": "Idh allu",
         "house_details": "H  2/328,-1,",
@@ -10067,6 +12767,21 @@
         "poi": null,
         "street": "ROAD NO.12",
         "subsubLocality": "BANJARA HILLS",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD",
+        "state": "Telangana",
+        "pincode": "500034"
+      },
+      "tinybert": {
+        "houseNumber": "8-2-684/3/K/20",
+        "houseName": "KAVSHIK SOCIETY",
+        "poi": null,
+        "street": ", ROAD NO.12",
+        "subsubLocality": null,
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -10133,6 +12848,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531115"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Nat",
+        "village": "Sarugudu",
+        "subDistrict": null,
+        "district": "khapatnam",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531115"
+      },
       "modernbert": {
         "pincode": " 531115. 531115",
         "landmarks": "Sar",
@@ -10182,6 +12912,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "Dispur",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781006"
+      },
+      "tinybert": {
+        "houseNumber": "Flat No. 04",
+        "houseName": "Dinesh Mansion",
+        "poi": null,
+        "street": "Dr. R.P. Road",
+        "subsubLocality": "Dispur",
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "Kamrup",
@@ -10245,6 +12990,21 @@
         "state": "Chandigarh",
         "pincode": "160001"
       },
+      "tinybert": {
+        "houseNumber": "# 202",
+        "houseName": "SHIVALIK ENCLAVE",
+        "poi": null,
+        "street": "NAC MANI",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "MA",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160001"
+      },
       "modernbert": {
         "house_details": "# 202",
         "building_name": " SHIVALIK ENCLAVE,",
@@ -10286,6 +13046,21 @@
         "pincode": "781028"
       },
       "qwen": {
+        "houseNumber": "HN 14",
+        "houseName": "MEGHMALLER RAJ APARTMENT",
+        "poi": null,
+        "street": "CHANDAN NAGAR",
+        "subsubLocality": "BELTOLA",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781028"
+      },
+      "tinybert": {
         "houseNumber": "HN 14",
         "houseName": "MEGHMALLER RAJ APARTMENT",
         "poi": null,
@@ -10355,6 +13130,21 @@
         "state": "ANDAMAN & NICOBAR ISLANDS",
         "pincode": "744103"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "PORT",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "POJUNGLIGHAT",
+        "village": null,
+        "subDistrict": null,
+        "district": "SOUTH ANDAMAN",
+        "city": "BLAIKOLKATA",
+        "state": "ANDAMAN & NICOBAR ISLANDS",
+        "pincode": "744103"
+      },
       "modernbert": {
         "landmarks": "POJUNGLIGH LA    PO",
         "road": "AT  PORT PO",
@@ -10411,6 +13201,21 @@
         "state": "CH",
         "pincode": "160001"
       },
+      "tinybert": {
+        "houseNumber": "H.NO: 870",
+        "houseName": "EXCEL COOPERATIVE HOUSE BUILDING",
+        "poi": "SOCIETY",
+        "street": "SECTOR 48",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
+        "pincode": "160001"
+      },
       "modernbert": {
         "house_details": "H.NO: 870 EXCEL",
         "building_name": " COOPERATIVE HOUSE BUILDING SOCIETY",
@@ -10458,6 +13263,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "BAMUNIMAIDAN",
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "ASSAM",
+        "pincode": "781021"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "PATH",
+        "poi": "AK CHEMICAL INDUSTRIESINDUSTRIAL ESTATE",
+        "street": null,
+        "subsubLocality": "BAMUNIMAIDAN",
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "Kamrup",
@@ -10515,6 +13335,21 @@
         "subDistrict": null,
         "district": "Bongaigaon",
         "city": "Bongaigaon",
+        "state": "AS",
+        "pincode": "783380"
+      },
+      "tinybert": {
+        "houseNumber": "FLAT NO D 03",
+        "houseName": "BAISAKHI APARTMENT",
+        "poi": null,
+        "street": "NAT",
+        "subsubLocality": "UNPARA",
+        "subLocality": null,
+        "locality": "DOLAIGAON",
+        "village": null,
+        "subDistrict": null,
+        "district": "BON",
+        "city": null,
         "state": "AS",
         "pincode": "783380"
       },
@@ -10576,6 +13411,21 @@
         "state": "AS",
         "pincode": "786001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "GOENKA BHAWAN",
+        "poi": null,
+        "street": "JYOTINAGAR",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "DIBRUGARH",
+        "city": null,
+        "state": "AS",
+        "pincode": "786001"
+      },
       "modernbert": {
         "building_name": "GOENKA BHAWAN J INAGAR",
         "landmarks": "Y",
@@ -10631,6 +13481,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531029"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "GA",
+        "village": "MMILIGAMMILI",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531029"
+      },
       "modernbert": {
         "house_details": "GAMMILIGAMMILI,-1,",
         "locality": "ALLURI SITHARAMA RAJU",
@@ -10680,6 +13545,21 @@
         "subLocality": null,
         "locality": "LAMMASINGI",
         "village": "LAMMASINGI",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531116"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "LAMMASINGI",
+        "village": "LammasingiLAMMASINGI",
         "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
         "city": null,
@@ -10742,6 +13622,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515521"
       },
+      "tinybert": {
+        "houseNumber": "5-261",
+        "houseName": null,
+        "poi": "Near Teliphon Exchange",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Nambulipulikunta",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515521"
+      },
       "modernbert": {
         "house_details": "5-261, 5-261,",
         "landmarks": " Near Teliphon Exchange, Near TeliphonExchange,  Near Teliphon Exchange,  Near TeliphonExchange,",
@@ -10790,6 +13685,21 @@
         "street": "JANPATH G.S. ROAD",
         "subsubLocality": null,
         "subLocality": "ULUBARI",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
+        "houseNumber": "21",
+        "houseName": "B.R. TOWER",
+        "poi": null,
+        "street": "JANPATH",
+        "subsubLocality": "ULUBARI",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -10853,6 +13763,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531036"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": "APP",
+        "street": "GADDI VSEH",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "KINTHALI VALLAPURAMANAPA",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531036"
+      },
       "modernbert": {
         "road": "K  V URAMANAPAGADDI VSEH APPARAO,-1,",
         "landmarks": "INTHALI ALLAP",
@@ -10908,6 +13833,21 @@
         "state": "ASSAM",
         "pincode": "781028"
       },
+      "tinybert": {
+        "houseNumber": "C3",
+        "houseName": "SARAIGHAT HOUSING COMPLEX",
+        "poi": "METROPOLITAN",
+        "street": null,
+        "subsubLocality": "BHETAPARA",
+        "subLocality": "RUP (",
+        "locality": null,
+        "village": "KAM",
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": null,
+        "pincode": "781028"
+      },
       "modernbert": {
         "house_details": "C3,",
         "building_name": " SARAIGHAT HOUSING COMPLEX,",
@@ -10959,6 +13899,21 @@
         "locality": "KONDAPURAM",
         "village": "YARRA",
         "subDistrict": "brahmasamudram",
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515761"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "KONDAPURAM",
+        "village": "KONDAPURAM",
+        "subDistrict": null,
         "district": "ANANTHAPURAMU",
         "city": null,
         "state": "ANDHRA PRADESH",
@@ -11020,6 +13975,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515767"
       },
+      "tinybert": {
+        "houseNumber": "D.No.",
+        "houseName": null,
+        "poi": "ndhra Pragathi Grameena Bank",
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "BrahmasamudramA",
+        "village": null,
+        "subDistrict": "hmasamudram (Village)",
+        "district": "Anantapur(Dist",
+        "city": null,
+        "state": "Andhra Pradesh",
+        "pincode": "515767"
+      },
       "modernbert": {
         "building_name": "Brah",
         "house_details": " D.No.2-114,",
@@ -11069,6 +14039,21 @@
         "street": "K.C. Road",
         "subsubLocality": null,
         "subLocality": "Chatribari",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "Guwahati",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "G.S. TOWER",
+        "poi": null,
+        "street": "K.C. Road",
+        "subsubLocality": "Chatribari",
+        "subLocality": null,
         "locality": null,
         "village": null,
         "subDistrict": null,
@@ -11133,6 +14118,21 @@
         "state": "Chandigarh",
         "pincode": "160022"
       },
+      "tinybert": {
+        "houseNumber": "SCO 3013-14",
+        "houseName": null,
+        "poi": null,
+        "street": "SECTOR 22 D",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160022"
+      },
       "modernbert": {
         "house_details": " 3013-14,  ",
         "building_name": " FLOOR",
@@ -11189,6 +14189,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "533445"
       },
+      "tinybert": {
+        "houseNumber": "2 25",
+        "houseName": null,
+        "poi": null,
+        "street": "vari veedhi",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Tatip",
+        "village": null,
+        "subDistrict": "gollaprolu mandalam",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533445"
+      },
       "modernbert": {
         "road": "Tatiparthi2  dasam,-1",
         "house_details": " 25 ,",
@@ -11231,6 +14246,21 @@
         "pincode": "533284"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "GANGAVARAMGORAGOMMI",
+        "village": null,
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533284"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": null,
         "poi": null,
@@ -11302,6 +14332,21 @@
         "state": "ASSAM",
         "pincode": "781001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "MANGLUNIA BHAWAN",
+        "poi": null,
+        "street": "DR B BARUAROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "ASSAM",
+        "pincode": "781001"
+      },
       "modernbert": {
         "road": "MANGLUNIA BHAWAN DR B BARUAROAD",
         "pincode": "1001"
@@ -11354,6 +14399,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531126"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Manga",
+        "village": "varam",
+        "subDistrict": null,
+        "district": "khapatnam",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531126"
+      },
       "modernbert": {
         "pincode": " 531126 531126",
         "locality": "Mangavaram,Village ,Payak opeta 1,",
@@ -11395,6 +14455,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "RAMKUMAR ARCADE",
+        "poi": null,
+        "street": "CHATRIBARI ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "KAMRUP",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "RAMKUMAR ARCADE",
         "poi": null,
@@ -11464,6 +14539,21 @@
         "state": "AS",
         "pincode": "781001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": "& CO OPP RED CROSS SOCIETY",
+        "street": "KEDAR ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
       "modernbert": {
         "landmarks": "C/O SUBHASH KUMAR JAIN & CO OPP RED CROSS SOCIETY,",
         "road": " KEDAR ROAD",
@@ -11518,6 +14608,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "533446"
       },
+      "tinybert": {
+        "houseNumber": "2-162/1",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "Pr",
+        "village": "tal",
+        "subDistrict": "athipadu Mandal",
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "533446"
+      },
       "modernbert": {
         "road": "Prathipadu Mandal",
         "locality": "aluru",
@@ -11564,6 +14669,21 @@
         "houseNumber": null,
         "houseName": "KINGWOOD TOWER",
         "poi": "NEWCARE GUWAHATI",
+        "street": "GMCH ROAD",
+        "subsubLocality": "BHANAGARH",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "KINGWOOD TOWER",
+        "poi": "NEWCARE",
         "street": "GMCH ROAD",
         "subsubLocality": "BHANAGARH",
         "subLocality": null,
@@ -11632,6 +14752,21 @@
         "state": "AS",
         "pincode": "781005"
       },
+      "tinybert": {
+        "houseNumber": "4-E",
+        "houseName": "JAGDISWAR ENCLAVE",
+        "poi": "NRL PETROL PUMP",
+        "street": "SUNDARPUR",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
       "modernbert": {
         "house_details": "4-E,",
         "building_name": " JAGDISWAR ENCLAVE,",
@@ -11690,6 +14825,21 @@
         "state": "Telangana",
         "pincode": "500081"
       },
+      "tinybert": {
+        "houseNumber": "PLOT NO.195",
+        "houseName": "SRINILAYA APARTMENTS",
+        "poi": null,
+        "street": "KAVURI HILLS",
+        "subsubLocality": "MADHAPUR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD-81",
+        "state": "Telangana",
+        "pincode": "500081"
+      },
       "modernbert": {
         "house_details": "PLOT NO.195, FLAT NO.9,",
         "building_name": "SRINILAYA APARTMENTS",
@@ -11742,6 +14892,21 @@
         "subLocality": null,
         "locality": "DUMBRIGUDA",
         "village": "KUPAGANTI",
+        "subDistrict": null,
+        "district": "ALLURI SITHARAMA RAJU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "531151"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "DUMBRIGUDAKUPAGANTI",
+        "village": null,
         "subDistrict": null,
         "district": "ALLURI SITHARAMA RAJU",
         "city": null,
@@ -11806,6 +14971,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "531126"
       },
+      "tinybert": {
+        "houseNumber": "332",
+        "houseName": null,
+        "poi": null,
+        "street": "MR. K VENU",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "payakaraopet",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": "visakhapatnam",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531126"
+      },
       "modernbert": {
         "locality": "payakaraopet akhapat YAKARAOPETA,- KAPALLI,",
         "landmarks": " vis nam  MR.  VENU,",
@@ -11859,6 +15039,21 @@
         "subDistrict": null,
         "district": "Jorhat",
         "city": "Jorhat",
+        "state": "AS",
+        "pincode": "785001"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "R.D COMPLEX",
+        "poi": "DAS & COMPANY",
+        "street": "K.B ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "JORHAT",
+        "village": null,
+        "subDistrict": null,
+        "district": "Jorhat",
+        "city": null,
         "state": "AS",
         "pincode": "785001"
       },
@@ -11918,6 +15113,21 @@
         "state": "ASSAM",
         "pincode": "781008"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "BRAHMACHARIA ROAD",
+        "subsubLocality": "REHABARI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": null,
+        "pincode": "781008"
+      },
       "modernbert": {
         "road": "BRAHMACHARIA ROAD",
         "locality": "REHABARI GUWAHATI"
@@ -11963,6 +15173,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "AMEERPET",
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD",
+        "state": "Telangana",
+        "pincode": "500016"
+      },
+      "tinybert": {
+        "houseNumber": "202",
+        "houseName": "S.V.S CLASSIC RESIDENCY",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "AMEERPET",
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": null,
@@ -12026,6 +15251,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515701"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "ReddipalleRekulakunta",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515701"
+      },
       "modernbert": {
         "road": "ReddipalleRekulakunta,-1",
         "locality": "ANANTHAPURAMU,",
@@ -12078,6 +15318,21 @@
         "district": null,
         "city": "Chandigarh",
         "state": "Chandigarh",
+        "pincode": "160002"
+      },
+      "tinybert": {
+        "houseNumber": "LEVEL 4",
+        "houseName": "TOWER",
+        "poi": null,
+        "street": "PLOT NO 70",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
         "pincode": "160002"
       },
       "modernbert": {
@@ -12133,6 +15388,21 @@
         "subDistrict": "JAGANNADHAPURAM",
         "district": "VISAKAPATNAM",
         "city": "ANAKAPALLI",
+        "state": "ANDHRA PRADESH",
+        "pincode": "531027"
+      },
+      "tinybert": {
+        "houseNumber": "DR NO: 63",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "VOMMALI",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANAKAPALLI",
+        "city": "VISAKAPATNAM",
         "state": "ANDHRA PRADESH",
         "pincode": "531027"
       },
@@ -12194,6 +15464,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "516268"
       },
+      "tinybert": {
+        "houseNumber": "27/12 15",
+        "houseName": null,
+        "poi": null,
+        "street": "delamalapalli Maddireddygaripalli Veera",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "mad",
+        "village": "pa Maddel",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "516268"
+      },
       "modernbert": {
         "house_details": "27/12 15 27/12 15",
         "road": " maddelamalapalli Madd dygaripalli  maddelamalapalli dygaripalli",
@@ -12237,6 +15522,21 @@
         "pincode": "781025"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "TILLOTTOMA APARTMENT",
+        "poi": null,
+        "street": "A.K.DEB ROAD",
+        "subsubLocality": "DHIRENPARA",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781025"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "TILLOTTOMA APARTMENT",
         "poi": null,
@@ -12307,6 +15607,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515408"
       },
+      "tinybert": {
+        "houseNumber": "15/786",
+        "houseName": null,
+        "poi": null,
+        "street": "Chowdeswari Colony",
+        "subsubLocality": "Chow",
+        "subLocality": null,
+        "locality": "Chow",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515408"
+      },
       "modernbert": {
         "house_details": "15/786, /786,",
         "landmarks": " Chowdeswari Colony, Chowdeswari Colony,Ch deswari Colony,  Chowdeswari Colony, ony ony",
@@ -12357,6 +15672,21 @@
         "subsubLocality": null,
         "subLocality": null,
         "locality": "GAURIPUR",
+        "village": null,
+        "subDistrict": null,
+        "district": "Dhubri",
+        "city": "GAURIPUR",
+        "state": "AS",
+        "pincode": "783331"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "MAHAMAYA COMPLEX",
+        "poi": null,
+        "street": "NH-31 WARD NO-3",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
         "village": null,
         "subDistrict": null,
         "district": "Dhubri",
@@ -12420,6 +15750,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515767"
       },
+      "tinybert": {
+        "houseNumber": "1-32",
+        "houseName": null,
+        "poi": null,
+        "street": null,
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "colony",
+        "village": "hmasamudram",
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515767"
+      },
       "modernbert": {
         "landmarks": "colony  brahmasamudram hmasamudram",
         "house_details": "1-32, BC 1",
@@ -12476,6 +15821,21 @@
         "state": "Chandigarh",
         "pincode": "160036"
       },
+      "tinybert": {
+        "houseNumber": "# 1616",
+        "houseName": null,
+        "poi": null,
+        "street": "Sector 36 D",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160036"
+      },
       "modernbert": {
         "house_details": "# 1616 ,",
         "road": " Sector 36 D     ",
@@ -12529,6 +15889,21 @@
         "district": null,
         "city": "CHANDIGARH",
         "state": "CH",
+        "pincode": "160047"
+      },
+      "tinybert": {
+        "houseNumber": "FLAT  NO 1003",
+        "houseName": "DAYAL",
+        "poi": "BAGH",
+        "street": "SECTOR 51-B",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "CHANDIGARH",
+        "state": null,
         "pincode": "160047"
       },
       "modernbert": {
@@ -12587,6 +15962,21 @@
         "state": "AS",
         "pincode": "781020"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "HAPPY LAB COMPLEX",
+        "poi": null,
+        "street": "GRC ROAD",
+        "subsubLocality": "NOONMATI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781020"
+      },
       "modernbert": {
         "building_name": "HAPPY LAB COMPLEX",
         "road": " GRC ROAD,",
@@ -12633,6 +16023,21 @@
         "poi": null,
         "street": "SILPHUKHURI",
         "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781003"
+      },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": null,
+        "poi": null,
+        "street": "G N B ROADSIL",
+        "subsubLocality": "PHUKHURI",
         "subLocality": null,
         "locality": null,
         "village": null,
@@ -12696,6 +16101,21 @@
         "state": "AS",
         "pincode": "785001"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "ARMAN COMPLEX",
+        "poi": null,
+        "street": "J.B.ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "JORHAT",
+        "village": null,
+        "subDistrict": null,
+        "district": "Jorhat",
+        "city": null,
+        "state": "AS",
+        "pincode": "785001"
+      },
       "modernbert": {
         "building_name": "ARMAN COMPLEX",
         "road": " J.B.ROAD",
@@ -12750,6 +16170,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515865"
       },
+      "tinybert": {
+        "houseNumber": "1-151-1",
+        "houseName": null,
+        "poi": null,
+        "street": "BC COLONY",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "D KONDAPURAM",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515865"
+      },
       "modernbert": {
         "building_name": "BC COLONY,",
         "road": "ONDAPURAM KondapuramC  PULLAIAH MADDI",
@@ -12793,6 +16228,21 @@
         "pincode": "781005"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "SHANKAR COMPLEX",
+        "poi": null,
+        "street": "G.S ROAD",
+        "subsubLocality": "CHRISTIAN BASTI",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781005"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "SHANKAR COMPLEX",
         "poi": null,
@@ -12863,6 +16313,21 @@
         "state": "ANDHRA PRADESH",
         "pincode": "515863"
       },
+      "tinybert": {
+        "houseNumber": "1/239",
+        "houseName": null,
+        "poi": "colany",
+        "street": "c",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": "polepalli brahmasamudram",
+        "village": null,
+        "subDistrict": null,
+        "district": "ANANTHAPURAMU",
+        "city": null,
+        "state": "ANDHRA PRADESH",
+        "pincode": "515863"
+      },
       "modernbert": {
         "landmarks": "c colany, polepalli brahmasamudram,bra mas",
         "building_name": "amudram",
@@ -12906,6 +16371,21 @@
         "pincode": "781007"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "GANPATI ENCLAVE",
+        "poi": "KOTAK MAHINDRA BANK",
+        "street": "G S ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781007"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "GANPATI ENCLAVE",
         "poi": "KOTAK MAHINDRA BANK",
@@ -12976,6 +16456,21 @@
         "state": "AS",
         "pincode": "781009"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "GEETA MANSION",
+        "poi": null,
+        "street": "H.B. ROAD",
+        "subsubLocality": "MACHKHOWA",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781009"
+      },
       "modernbert": {
         "building_name": "GEETA MANSION,",
         "road": " H.B. ROAD",
@@ -13028,6 +16523,21 @@
         "district": null,
         "city": "Chandigarh",
         "state": "Chandigarh",
+        "pincode": "160036"
+      },
+      "tinybert": {
+        "houseNumber": "House No. 1520",
+        "houseName": null,
+        "poi": null,
+        "street": "Sector 36-D",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
         "pincode": "160036"
       },
       "modernbert": {
@@ -13086,6 +16596,21 @@
         "state": "Chandigarh",
         "pincode": "160101"
       },
+      "tinybert": {
+        "houseNumber": "#5160",
+        "houseName": "CATEGORY",
+        "poi": "-I MODERN HOUSING COMPLEX",
+        "street": null,
+        "subsubLocality": "MANI",
+        "subLocality": "MAJRA",
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "Chandigarh",
+        "state": null,
+        "pincode": "160101"
+      },
       "modernbert": {
         "house_details": "#5160,",
         "building_name": " CATEGORY-I MODERN HOUSING COMPLEX, MAN",
@@ -13127,6 +16652,21 @@
         "pincode": "500001"
       },
       "qwen": {
+        "houseNumber": "NO.610",
+        "houseName": "BABUKHAN ESTATE",
+        "poi": null,
+        "street": null,
+        "subsubLocality": "BASHIRBAGH",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": null,
+        "city": "HYDERABAD",
+        "state": "Telangana",
+        "pincode": "500001"
+      },
+      "tinybert": {
         "houseNumber": "NO.610",
         "houseName": "BABUKHAN ESTATE",
         "poi": null,
@@ -13196,6 +16736,21 @@
         "state": "AS",
         "pincode": "781024"
       },
+      "tinybert": {
+        "houseNumber": null,
+        "houseName": "PARNIL COMPLEX",
+        "poi": null,
+        "street": "R.G.BARUAH ROAD",
+        "subsubLocality": null,
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781024"
+      },
       "modernbert": {
         "floor": "3rd FLOOR,",
         "building_name": "PARNIL COMPLEX,",
@@ -13237,6 +16792,21 @@
         "pincode": "781001"
       },
       "qwen": {
+        "houseNumber": null,
+        "houseName": "KALINDI PLAZA",
+        "poi": null,
+        "street": "DR. J. C. DAS ROAD",
+        "subsubLocality": "PANBAZAR",
+        "subLocality": null,
+        "locality": null,
+        "village": null,
+        "subDistrict": null,
+        "district": "Kamrup",
+        "city": "GUWAHATI",
+        "state": "AS",
+        "pincode": "781001"
+      },
+      "tinybert": {
         "houseNumber": null,
         "houseName": "KALINDI PLAZA",
         "poi": null,

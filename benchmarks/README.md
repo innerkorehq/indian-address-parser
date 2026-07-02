@@ -1,8 +1,11 @@
-# Model comparison: our flan-t5-small and Qwen3-0.6B models vs shiprocket-ai/open-modernbert-indian-address-ner
+# Model comparison: our three models vs shiprocket-ai/open-modernbert-indian-address-ner
 
-`compare_models.py` benchmarks this package's two models — the default
-`t5` backend ([flan-t5-small](https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser))
-and the `qwen` backend ([Qwen3-0.6B + LoRA](https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser)) —
+`compare_models.py` benchmarks this package's three models — `t5`
+([flan-t5-small](https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser),
+default), `qwen`
+([Qwen3-0.6B + LoRA](https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser)),
+and `tinybert`
+([TinyBERT 4L/312D](https://huggingface.co/gagan1985/tinybert-4l-312d-indian-address-parser)) —
 against Shiprocket's
 [open-modernbert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-modernbert-indian-address-ner)
 on a shared, held-out gold-labeled test set.
@@ -12,12 +15,12 @@ on a shared, held-out gold-labeled test set.
 
 ## Why this isn't a simple apples-to-apples score
 
-Our two models share the same 13-field taxonomy; Shiprocket's model uses a
+Our three models share the same 13-field taxonomy; Shiprocket's model uses a
 different, 11-entity BIO-NER schema:
 
-| | Our models (t5, qwen) | Shiprocket's modernbert |
+| | Our models (t5, qwen, tinybert) | Shiprocket's modernbert |
 |---|---|---|
-| Architecture | flan-t5-small (encoder-decoder, full fine-tune) / Qwen3-0.6B + LoRA (causal LM) — both generate JSON | ModernBERT, BIO token classification |
+| Architecture | flan-t5-small (encoder-decoder, JSON generation) / Qwen3-0.6B + LoRA (causal LM, JSON generation) / TinyBERT 4L/312D (BERT encoder, BIO token classification) | ModernBERT, BIO token classification |
 | Fields / entities | 13: houseNumber, houseName, poi, street, subsubLocality, subLocality, locality, village, subDistrict, district, city, state, pincode | 11: building_name, house_details, road, sub_locality, locality, city, state, pincode, country, landmarks, floor |
 
 `compare_models.py` only scores the **9 fields with a clear conceptual overlap**
@@ -38,19 +41,22 @@ training pipeline's test split (never used to train any of these models). Each l
 
 ```bash
 pip install indian-address-parser transformers torch
-python compare_models.py                          # full 237-example benchmark, all 3 models
-python compare_models.py --n 50                    # quick subset
-python compare_models.py --models t5 modernbert     # skip the slower qwen backend
-python compare_models.py --out results.json        # save per-example detail
+python compare_models.py                              # full 237-example benchmark, all 4 models
+python compare_models.py --n 50                        # quick subset
+python compare_models.py --models t5 tinybert modernbert  # skip the slower qwen backend
+python compare_models.py --out results.json            # save per-example detail
 ```
 
 ## What's reported
 
-- Per-field accuracy for all three models against gold, restricted to the 9 shared fields
-- JSON parse rate and overall exact-match rate for our two models (not applicable to modernbert — it's a token classifier, not a JSON generator)
-- Wall-clock inference time per model (ModernBERT, a small encoder run once per
-  address, is architecturally much faster than either of our generative
-  models — this is an expected, not surprising, result and is reported for
+- Per-field accuracy for all four models against gold, restricted to the 9 shared fields
+- JSON parse rate and overall exact-match rate for our two generative models
+  (`t5`, `qwen`); overall exact-match only (no JSON parse rate — not
+  applicable) for `tinybert` and `modernbert`, both token classifiers that
+  always produce a well-formed field dict
+- Wall-clock inference time per model (the two token-classification models —
+  `tinybert` and modernbert — are architecturally much faster than either
+  generative model, an expected, not surprising, result reported for
   completeness, not as a quality judgment)
 
 ## Results (full 237-example benchmark)
@@ -58,49 +64,52 @@ python compare_models.py --out results.json        # save per-example detail
 Run with `python compare_models.py --out full_results.json` (per-example detail
 in [`full_results.json`](full_results.json)).
 
-| Field | t5 (ours) | qwen (ours) | modernbert | Gold presence |
-|---|---|---|---|---|
-| houseNumber | 84.5% | 84.5% | 43.4% | 54.4% |
-| houseName | 80.8% | 88.5% | 64.4% | 43.9% |
-| street | 47.6% | 54.0% | 38.9% | 53.2% |
-| locality | 29.8% | 33.7% | 5.8% | 43.9% |
-| subLocality | 13.7% | 23.5% | 0.0% | 21.5% |
-| city | 88.6% | 91.3% | 4.7% | 62.9% |
-| state | 95.3% | 96.2% | 35.9% | 98.7% |
-| pincode | 97.9% | 100.0% | 73.8% | 100.0% |
-| poi | 0.0% | 30.8% | 5.1% | 16.5% |
+| Field | t5 (ours) | qwen (ours) | tinybert (ours) | modernbert | Gold presence |
+|---|---|---|---|---|---|
+| houseNumber | 84.5% | 84.5% | 79.8% | 43.4% | 54.4% |
+| houseName | 80.8% | 88.5% | 81.7% | 64.4% | 43.9% |
+| street | 47.6% | 54.0% | 50.0% | 38.9% | 53.2% |
+| locality | 29.8% | 33.7% | 36.5% | 5.8% | 43.9% |
+| subLocality | 13.7% | 23.5% | 0.0% | 0.0% | 21.5% |
+| city | 88.6% | 91.3% | 82.6% | 4.7% | 62.9% |
+| state | 95.3% | 96.2% | 84.2% | 35.9% | 98.7% |
+| pincode | 97.9% | 100.0% | 99.2% | 73.8% | 100.0% |
+| poi | 0.0% | 30.8% | 20.5% | 5.1% | 16.5% |
 
 - **flan-t5-small (t5) JSON parse rate**: 99.6% &nbsp;|&nbsp; **overall exact match** (all 9 shared fields correct): 24.2%
 - **qwen3-0.6b (qwen) JSON parse rate**: 100.0% &nbsp;|&nbsp; **overall exact match**: 30.4%
-- **Inference time** — t5: 682.9s total (2881ms/address) · qwen: 756.6s total (3192ms/address) · modernbert: 5.5s total (23ms/address, **~130-140x faster** than either of our models)
+- **tinybert-4l-312d (tinybert) overall exact match**: 22.8%
+- **Inference time** — t5: 647.6s total (2732ms/address) · qwen: 768.9s total (3244ms/address) · tinybert: 3.4s total (15ms/address) · modernbert: 4.9s total (21ms/address)
 
-qwen scores highest on every one of the 9 shared fields; t5 is close behind on
-most fields but notably weaker on `poi` (0.0% — it defaults to `null` far more
-often than gold does) and the low-recall fields in general, consistent with
-its own [model card](https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser)'s
-noted limitations. modernbert scores lowest on every field, and by a wide
-margin on `city`/`state`/`locality` in particular.
+qwen scores highest on every one of the 9 shared fields. t5 and tinybert trade
+places field-by-field — tinybert actually edges out t5 on `locality` (36.5%
+vs 29.8%) and `poi` (20.5% vs 0.0%), while t5 leads on `city`/`state`/`street`
+— despite tinybert being ~5x smaller than t5 and ~40x smaller than qwen.
+`subLocality` is the one field neither t5 nor tinybert can extract at all
+(0% recall on both, consistent with each model's own card).
 
-**modernbert's low scores aren't a benchmarking artifact — we checked.**
-Inspecting raw (unaggregated) per-token predictions shows the model itself
-flip-flops entity tags *within a single word* on multi-word suffixes (e.g.
-for "Kamrup Unclassified", `"Kam"` tagged `B-sub_locality` at 0.45 confidence,
-then `"rup"` tagged `I-locality` at 0.42 — genuinely low-confidence, internally
-inconsistent predictions, not a tokenizer/aggregation mismatch in this
-script). This pattern — high confidence on short, common fields and
-attention-inconsistent classification on longer administrative-suffix
-sequences — was reproducible across multiple examples in
-[`full_results.json`](full_results.json).
+**tinybert is also the fastest model here**, edging out even modernbert
+(3.4s vs 4.9s for 237 addresses) — both are small BERT-style encoders run
+once per address, but TinyBERT's 4-layer/312-hidden architecture is smaller
+still than ModernBERT's.
 
-As with the earlier tinybert comparison: modernbert is dramatically faster
-and far smaller than either of our models — a real, architecture-driven
-tradeoff, not just a quality artifact. If your use case needs
-high-throughput/low-latency parsing and can tolerate lower field accuracy,
-modernbert may still be the better fit; if accuracy matters more than raw
-speed, either of this package's models is the stronger choice on this
-benchmark, with qwen scoring a few points higher than t5 at roughly the same
-inference cost as each other (t5's main real-world advantage is being ~8x
-smaller to download and load, not faster to run per-token here).
+modernbert scores lowest on every field, and by a wide margin on
+`city`/`state`/`locality` in particular. **This isn't a benchmarking
+artifact — we checked.** Inspecting raw (unaggregated) per-token predictions
+shows the model itself flip-flops entity tags *within a single word* on
+multi-word suffixes (e.g. for "Kamrup Unclassified", `"Kam"` tagged
+`B-sub_locality` at 0.45 confidence, then `"rup"` tagged `I-locality` at 0.42
+— genuinely low-confidence, internally inconsistent predictions, not a
+tokenizer/aggregation mismatch in this script). This pattern — high
+confidence on short, common fields and attention-inconsistent classification
+on longer administrative-suffix sequences — was reproducible across multiple
+examples in [`full_results.json`](full_results.json).
+
+If your use case needs high-throughput/low-latency parsing and can tolerate
+lower field accuracy, `tinybert` is the clear pick among our own models (and
+beats modernbert outright on every shared field while also being faster). If
+accuracy matters more than speed, `qwen` is the strongest choice on this
+benchmark, with `t5` close behind at a fraction of the download/load cost.
 
 One important caveat: the gold labels themselves were generated for *this
 project's* 13-field taxonomy, so field-boundary conventions (e.g. exactly
