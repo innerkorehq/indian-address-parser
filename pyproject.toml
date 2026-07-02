@@ -33,7 +33,7 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/innerkorehq/indian-address-parser"
 Repository = "https://github.com/innerkorehq/indian-address-parser"
-"Model (t5, default)" = "https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser"
+"Model (t5 - default)" = "https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser"
 "Model (qwen)" = "https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser"
 
 [project.scripts]
