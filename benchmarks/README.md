@@ -117,3 +117,11 @@ where "street" starts/ends, whether a landmark word is included) reflect this
 project's labeling choices, not Shiprocket's. This is an inherent limitation
 of scoring two different taxonomies against one schema's gold labels, not
 something this script can fully correct for.
+
+## See also
+
+[`TINYBERT_COMPARISON.md`](TINYBERT_COMPARISON.md) — a separate, narrower
+comparison: our `tinybert` backend vs Shiprocket's *other* model,
+[open-tinybert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-tinybert-indian-address-ner)
+(a same-name matchup, though not actually the same architecture size — see
+that doc for the full breakdown). Our model wins on all 9 shared fields.

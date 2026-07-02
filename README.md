@@ -119,13 +119,17 @@ etc.):
 
 ## Comparison to other models
 
-[`benchmarks/`](benchmarks/) has a head-to-head comparison of all three of our backends
-against Shiprocket's
-[open-modernbert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-modernbert-indian-address-ner)
-on a 237-example held-out gold test set. See
-[`benchmarks/README.md`](benchmarks/README.md) for the full field-by-field
-results and methodology (the models use different field taxonomies, so only
-overlapping fields are scored).
+[`benchmarks/`](benchmarks/) has two head-to-head comparisons against Shiprocket's
+models on a shared, 237-example held-out gold test set (both models use
+different field taxonomies than ours, so only overlapping fields are scored):
+- All three of our backends vs
+  [open-modernbert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-modernbert-indian-address-ner)
+  — see [`benchmarks/README.md`](benchmarks/README.md)
+- Our `tinybert` backend vs Shiprocket's *other* model,
+  [open-tinybert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-tinybert-indian-address-ner)
+  — a same-name matchup (though not the same architecture size: ours is
+  ~14M params, theirs ~66.4M). Our model wins on all 9 shared fields. See
+  [`benchmarks/TINYBERT_COMPARISON.md`](benchmarks/TINYBERT_COMPARISON.md)
 
 ## Apple Silicon (MLX) users
 
