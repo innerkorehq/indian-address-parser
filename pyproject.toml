@@ -4,15 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "indian-address-parser"
-version = "0.1.3"
-description = "Parse raw Indian address strings into structured fields using a fine-tuned Qwen3 LoRA adapter"
+version = "0.2.0"
+description = "Parse raw Indian address strings into structured fields using fine-tuned flan-t5-small (default) or Qwen3 LoRA models"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.9"
 authors = [
     { name = "Gagandeep" }
 ]
-keywords = ["nlp", "address-parsing", "india", "named-entity-recognition", "lora", "qwen"]
+keywords = ["nlp", "address-parsing", "india", "named-entity-recognition", "lora", "qwen", "t5", "flan-t5"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: Apache Software License",
@@ -33,7 +33,8 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/innerkorehq/indian-address-parser"
 Repository = "https://github.com/innerkorehq/indian-address-parser"
-Model = "https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser"
+"Model (t5, default)" = "https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser"
+"Model (qwen)" = "https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser"
 
 [project.scripts]
 indian-address-parser = "indian_address_parser.cli:main"

@@ -61,7 +61,10 @@ def load_benchmark(path: str, n: int | None) -> list[dict]:
 def run_ours(addresses: list[str]) -> tuple[list[dict], float]:
     from indian_address_parser import AddressParser
 
-    parser = AddressParser()
+    # Pinned to "qwen" explicitly: these are the published benchmark numbers
+    # (README, benchmarks/README.md) and must stay stable even though the
+    # package's own default backend is "t5".
+    parser = AddressParser(backend="qwen")
     results = []
     t0 = time.perf_counter()
     for addr in addresses:

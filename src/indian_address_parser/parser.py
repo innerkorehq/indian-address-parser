@@ -1,9 +1,15 @@
 """Core AddressParser class.
 
-Loads a LoRA adapter from Hugging Face Hub on top of a base Qwen3 model and parses
-raw Indian address strings into structured fields. Model tensors are always fetched
-from the Hugging Face repo (default: gagan1985/qwen3-0.6b-indian-address-parser) —
-this package ships only inference code, no weights.
+Two backends, both fetched from Hugging Face Hub — this package ships only
+inference code, no weights:
+
+- "t5" (default): a full fine-tune of google/flan-t5-small
+  (gagan1985/flan-t5-small-indian-address-parser). ~77M params, encoder-decoder,
+  single model download, no adapter/base-model split. Faster and lighter; a couple
+  points lower accuracy on rare/ambiguous fields.
+- "qwen": a LoRA adapter on Qwen/Qwen3-0.6B
+  (gagan1985/qwen3-0.6b-indian-address-parser). ~596M params, causal LM, needs
+  both the adapter and the base model. Slower and heavier; the more accurate option.
 """
 from __future__ import annotations
 
@@ -23,8 +29,11 @@ os.environ.setdefault("USE_TF", "0")
 os.environ.setdefault("USE_TORCH", "1")
 os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
 
+DEFAULT_T5_MODEL = "gagan1985/flan-t5-small-indian-address-parser"
 DEFAULT_ADAPTER_REPO = "gagan1985/qwen3-0.6b-indian-address-parser"
 DEFAULT_BASE_MODEL = "Qwen/Qwen3-0.6B"
+
+BACKENDS = ("t5", "qwen")
 
 ALL_FIELDS = (
     "houseNumber",
@@ -51,40 +60,78 @@ SYSTEM_PROMPT = (
 
 USER_TEMPLATE = "Parse this address:\n{raw_address}"
 
+# T5 was pretrained on task-prefixed inputs; this is the exact prefix the
+# gagan1985/flan-t5-small-indian-address-parser model was fine-tuned with.
+T5_TASK_PREFIX = "parse indian address: "
+T5_MAX_INPUT_LENGTH = 160
+
+
+def _pick_device_and_dtype(device: str | None):
+    import torch
+
+    dtype = torch.float32
+    if device is None:
+        if torch.cuda.is_available():
+            device = "cuda"
+            dtype = torch.bfloat16
+        elif torch.backends.mps.is_available():
+            device = "mps"
+            dtype = torch.float16
+        else:
+            device = "cpu"
+    return device, dtype
+
 
 class AddressParser:
     """Parses raw Indian address strings into 13 structured fields.
 
     Example:
-        >>> parser = AddressParser()
+        >>> parser = AddressParser()  # defaults to the flan-t5-small backend
         >>> parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
         {'houseNumber': 'FLAT NO.32', 'houseName': 'UTTARA TOWERS', 'poi': None, ...}
+
+        >>> parser = AddressParser(backend="qwen")  # larger, more accurate LoRA model
+        >>> parser.parse("...")
     """
 
     def __init__(
         self,
-        adapter_repo: str = DEFAULT_ADAPTER_REPO,
-        base_model: str = DEFAULT_BASE_MODEL,
+        backend: str = "t5",
+        model_repo: str | None = None,
+        adapter_repo: str | None = None,
+        base_model: str | None = None,
         device: str | None = None,
         max_new_tokens: int = 256,
     ):
-        import torch
+        if backend not in BACKENDS:
+            raise ValueError(f"backend must be one of {BACKENDS}, got {backend!r}")
+        self.backend = backend
+        self.max_new_tokens = max_new_tokens
+
+        if backend == "t5":
+            self._init_t5(model_repo or DEFAULT_T5_MODEL, device)
+        else:
+            self._init_qwen(adapter_repo or DEFAULT_ADAPTER_REPO, base_model or DEFAULT_BASE_MODEL, device)
+
+    def _init_t5(self, model_repo: str, device: str | None):
+        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+        device, dtype = _pick_device_and_dtype(device)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_repo)
+        try:
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_repo, dtype=dtype)
+        except TypeError:
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(model_repo, torch_dtype=dtype)
+        self.model.to(device)
+        self.model.eval()
+        self.device = device
+
+    def _init_qwen(self, adapter_repo: str, base_model: str, device: str | None):
         from peft import PeftModel
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
-        self.max_new_tokens = max_new_tokens
+        device, dtype = _pick_device_and_dtype(device)
         self.tokenizer = AutoTokenizer.from_pretrained(adapter_repo)
-
-        dtype = torch.float32
-        if device is None:
-            if torch.cuda.is_available():
-                device = "cuda"
-                dtype = torch.bfloat16
-            elif torch.backends.mps.is_available():
-                device = "mps"
-                dtype = torch.float16
-            else:
-                device = "cpu"
 
         # `torch_dtype` is deprecated in favor of `dtype` in newer transformers, but
         # `dtype` doesn't exist yet on older ones (verified: fails on 4.51.0) — try the
@@ -103,6 +150,33 @@ class AddressParser:
         """Parse a single raw address string. Returns a dict with all 13 ALL_FIELDS
         keys (null for fields not present). On generation output that isn't valid
         JSON, all fields are null and `_parse_error` holds the raw model output."""
+        if self.backend == "t5":
+            generated = self._generate_t5(raw_address)
+        else:
+            generated = self._generate_qwen(raw_address)
+
+        try:
+            result = json.loads(generated.strip())
+            result = {f: result.get(f) for f in ALL_FIELDS}
+        except json.JSONDecodeError:
+            result = {f: None for f in ALL_FIELDS}
+            result["_parse_error"] = generated.strip()
+        return result
+
+    def _generate_t5(self, raw_address: str) -> str:
+        import torch
+
+        input_text = T5_TASK_PREFIX + raw_address
+        inputs = self.tokenizer(
+            input_text, return_tensors="pt", truncation=True, max_length=T5_MAX_INPUT_LENGTH
+        ).to(self.device)
+        with torch.no_grad():
+            out = self.model.generate(
+                **inputs, max_new_tokens=self.max_new_tokens, num_beams=1, do_sample=False
+            )
+        return self.tokenizer.decode(out[0], skip_special_tokens=True)
+
+    def _generate_qwen(self, raw_address: str) -> str:
         import torch
 
         messages = [
@@ -124,15 +198,7 @@ class AddressParser:
                 do_sample=False,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
-        generated = self.tokenizer.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-
-        try:
-            result = json.loads(generated.strip())
-            result = {f: result.get(f) for f in ALL_FIELDS}
-        except json.JSONDecodeError:
-            result = {f: None for f in ALL_FIELDS}
-            result["_parse_error"] = generated.strip()
-        return result
+        return self.tokenizer.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
 
     def parse_batch(self, addresses: list[str]) -> list[dict]:
         """Parse multiple addresses sequentially. See `parse` for the per-item shape."""
