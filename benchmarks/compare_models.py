@@ -1,20 +1,23 @@
-"""Compare gagan1985/qwen3-0.6b-indian-address-parser against
-shiprocket-ai/open-tinybert-indian-address-ner on a held-out gold test set.
+"""Compare this package's two models (flan-t5-small default, Qwen3-0.6B LoRA)
+against shiprocket-ai/open-modernbert-indian-address-ner on a held-out gold
+test set.
 
-The two models use DIFFERENT field taxonomies (ours: 13 fields including
-houseNumber/houseName/street/subLocality/subsubLocality/village/subDistrict/
-district/city/state/pincode/poi; theirs: an 11-entity BIO-NER schema with
-building_name/house_details/road/sub_locality/locality/city/state/pincode/
+Our two models use the SAME 13-field taxonomy (houseNumber/houseName/poi/
+street/subsubLocality/subLocality/locality/village/subDistrict/district/city/
+state/pincode). Shiprocket's model uses a different, 11-entity BIO-NER schema
+(building_name/house_details/road/sub_locality/locality/city/state/pincode/
 country/landmarks/floor). This script only scores fields with a clear
-conceptual overlap (see FIELD_MAP below) — fields unique to one schema
-(our subsubLocality/village/subDistrict/district, their country/floor) are
-reported separately as "not comparable," not silently dropped or forced
-into a mapping that would misrepresent either model.
+conceptual overlap between our schema and theirs (see FIELD_MAP below) —
+fields unique to one schema (our subsubLocality/village/subDistrict/district,
+their country/floor) are reported separately as "not comparable," not
+silently dropped or forced into a mapping that would misrepresent either
+model.
 
 Usage:
     pip install indian-address-parser transformers torch
     python compare_models.py                      # full 237-example benchmark
     python compare_models.py --n 50                # quick subset
+    python compare_models.py --models t5 modernbert  # skip the slower qwen backend
     python compare_models.py --out results.json    # save detailed results
 """
 from __future__ import annotations
@@ -23,9 +26,24 @@ import argparse
 import json
 import time
 
-# our_field -> shiprocket_entity_group. Only fields with a real conceptual
-# match on both sides are included; this is the intersection, not a forced
-# 1:1 mapping of every field.
+MODEL_LABELS = {
+    "t5": "flan-t5-small (ours, default)",
+    "qwen": "qwen3-0.6b (ours, previous default)",
+    "modernbert": "shiprocket modernbert",
+}
+# Short labels for the fixed-width table columns; MODEL_LABELS (above) is used
+# everywhere else (prose lines, JSON output keys' human-readable form, etc.)
+MODEL_SHORT_LABELS = {
+    "t5": "t5 (ours)",
+    "qwen": "qwen (ours)",
+    "modernbert": "modernbert",
+}
+ALL_MODELS = tuple(MODEL_LABELS)
+
+# canonical_field -> shiprocket_entity_group. Only fields with a real
+# conceptual match on both sides are included; this is the intersection, not
+# a forced 1:1 mapping of every field. Our two models (t5, qwen) share this
+# exact field name for each canonical field, so no mapping is needed for them.
 FIELD_MAP = {
     "houseNumber": "house_details",
     "houseName": "building_name",
@@ -38,10 +56,13 @@ FIELD_MAP = {
     "poi": "landmarks",
 }
 
-# Fields each model has that the other doesn't — reported as coverage info,
-# never scored against a field they don't actually attempt to predict.
+# Fields our models have that shiprocket's schema doesn't, and vice versa —
+# reported as coverage info, never scored against a field a model doesn't
+# actually attempt to predict.
 OUR_ONLY_FIELDS = ("subsubLocality", "village", "subDistrict", "district")
 THEIRS_ONLY_ENTITIES = ("country", "floor")
+
+SHIPROCKET_MODEL_ID = "shiprocket-ai/open-modernbert-indian-address-ner"
 
 
 def _normalize(text) -> str:
@@ -58,13 +79,10 @@ def load_benchmark(path: str, n: int | None) -> list[dict]:
     return items[:n] if n else items
 
 
-def run_ours(addresses: list[str]) -> tuple[list[dict], float]:
+def run_ours(addresses: list[str], backend: str) -> tuple[list[dict], float]:
     from indian_address_parser import AddressParser
 
-    # Pinned to "qwen" explicitly: these are the published benchmark numbers
-    # (README, benchmarks/README.md) and must stay stable even though the
-    # package's own default backend is "t5".
-    parser = AddressParser(backend="qwen")
+    parser = AddressParser(backend=backend)
     results = []
     t0 = time.perf_counter()
     for addr in addresses:
@@ -76,9 +94,7 @@ def run_ours(addresses: list[str]) -> tuple[list[dict], float]:
 def run_shiprocket(addresses: list[str]) -> tuple[list[dict], float]:
     from transformers import pipeline
 
-    nlp = pipeline(
-        "ner", model="shiprocket-ai/open-tinybert-indian-address-ner", aggregation_strategy="simple"
-    )
+    nlp = pipeline("ner", model=SHIPROCKET_MODEL_ID, aggregation_strategy="simple")
     results = []
     t0 = time.perf_counter()
     for addr in addresses:
@@ -93,97 +109,127 @@ def run_shiprocket(addresses: list[str]) -> tuple[list[dict], float]:
     return results, elapsed
 
 
-def score(benchmark: list[dict], ours: list[dict], theirs: list[dict]) -> dict:
+def run_model(name: str, addresses: list[str]) -> tuple[list[dict], float]:
+    if name in ("t5", "qwen"):
+        return run_ours(addresses, backend=name)
+    if name == "modernbert":
+        return run_shiprocket(addresses)
+    raise ValueError(f"unknown model {name!r}")
+
+
+def score(benchmark: list[dict], preds: dict[str, list[dict]]) -> dict:
     n = len(benchmark)
-    stats = {
-        field: {"ours_correct": 0, "theirs_correct": 0, "gold_present": 0}
-        for field in FIELD_MAP
-    }
-    our_exact = 0
-    our_json_ok = 0
+    stats = {field: {m: 0 for m in preds} | {"gold_present": 0} for field in FIELD_MAP}
+    overall = {m: {"exact": 0, "json_ok": 0} for m in preds if m in ("t5", "qwen")}
 
-    for item, our_pred, their_pred in zip(benchmark, ours, theirs):
+    for i, item in enumerate(benchmark):
         gold = item["gold"]
-        if "_parse_error" not in our_pred:
-            our_json_ok += 1
+        all_match = {m: True for m in overall}
 
-        all_match = True
-        for our_field, their_field in FIELD_MAP.items():
-            gold_val = _normalize(gold.get(our_field))
-            our_val = _normalize(our_pred.get(our_field))
-            their_val = _normalize(their_pred.get(their_field))
+        for m in overall:
+            pred = preds[m][i]
+            if "_parse_error" not in pred:
+                overall[m]["json_ok"] += 1
 
+        for field, entity in FIELD_MAP.items():
+            gold_val = _normalize(gold.get(field))
             if gold_val:
-                stats[our_field]["gold_present"] += 1
-                if our_val == gold_val:
-                    stats[our_field]["ours_correct"] += 1
-                else:
-                    all_match = False
-                if their_val == gold_val:
-                    stats[our_field]["theirs_correct"] += 1
-        if all_match:
-            our_exact += 1
+                stats[field]["gold_present"] += 1
+
+            for m, model_preds in preds.items():
+                pred = model_preds[i]
+                pred_val = _normalize(pred.get(field if m != "modernbert" else entity))
+                if gold_val:
+                    if pred_val == gold_val:
+                        stats[field][m] += 1
+                    elif m in all_match:
+                        all_match[m] = False
+
+        for m in overall:
+            if all_match[m]:
+                overall[m]["exact"] += 1
 
     return {
         "n": n,
-        "our_json_parse_rate": our_json_ok / n,
-        "our_overall_exact_match": our_exact / our_json_ok if our_json_ok else 0,
+        "models": list(preds),
+        "overall": {
+            m: {
+                "json_parse_rate": overall[m]["json_ok"] / n,
+                "exact_match": overall[m]["exact"] / overall[m]["json_ok"] if overall[m]["json_ok"] else 0,
+            }
+            for m in overall
+        },
         "per_field": stats,
     }
 
 
-def print_report(results: dict, our_time: float, their_time: float, n: int):
+def print_report(results: dict, timings: dict[str, float], n: int):
+    models = results["models"]
     print(f"\nBenchmark: {n} held-out gold-labeled addresses")
-    print(f"(neither model was trained on this exact held-out split)\n")
+    print("(none of these models were trained on this exact held-out split)\n")
 
-    print(f"{'Field':16s} {'Ours (acc)':>12s} {'Shiprocket (acc)':>18s} {'Gold presence':>14s}")
-    print("-" * 64)
+    col_w = 14
+    header = f"{'Field':16s} " + " ".join(f"{MODEL_SHORT_LABELS[m]:>{col_w}s}" for m in models) + f" {'Gold presence':>14s}"
+    print(header)
+    print("-" * len(header))
     for field, s in results["per_field"].items():
         n_gold = s["gold_present"]
-        our_acc = s["ours_correct"] / n_gold if n_gold else float("nan")
-        their_acc = s["theirs_correct"] / n_gold if n_gold else float("nan")
         pres = n_gold / results["n"]
-        our_str = f"{100*our_acc:.1f}%" if n_gold else "n/a"
-        their_str = f"{100*their_acc:.1f}%" if n_gold else "n/a"
-        print(f"{field:16s} {our_str:>12s} {their_str:>18s} {100*pres:>13.1f}%")
+        row = f"{field:16s} "
+        for m in models:
+            acc = s[m] / n_gold if n_gold else float("nan")
+            row += f"{(f'{100*acc:.1f}%' if n_gold else 'n/a'):>{col_w}s} "
+        row += f"{100*pres:>13.1f}%"
+        print(row)
 
     print()
-    print(f"Our JSON parse rate:        {100*results['our_json_parse_rate']:.1f}%")
-    print(f"Our overall exact match:    {100*results['our_overall_exact_match']:.1f}% (all {len(FIELD_MAP)} shared fields correct)")
+    for m in models:
+        if m in results["overall"]:
+            o = results["overall"][m]
+            print(f"{MODEL_LABELS[m]} JSON parse rate:     {100*o['json_parse_rate']:.1f}%")
+            print(f"{MODEL_LABELS[m]} overall exact match: {100*o['exact_match']:.1f}% (all {len(FIELD_MAP)} shared fields correct)")
     print()
-    print(f"Fields we predict that shiprocket's schema has no equivalent for: {', '.join(OUR_ONLY_FIELDS)}")
-    print(f"Entities shiprocket predicts that we don't have an equivalent field for: {', '.join(THEIRS_ONLY_ENTITIES)}")
+    if "t5" in models or "qwen" in models:
+        print(f"Fields our models predict that shiprocket's schema has no equivalent for: {', '.join(OUR_ONLY_FIELDS)}")
+    if "modernbert" in models:
+        print(f"Entities shiprocket predicts that we don't have an equivalent field for: {', '.join(THEIRS_ONLY_ENTITIES)}")
     print()
-    print(f"Inference time — ours:       {our_time:.1f}s total ({1000*our_time/n:.0f}ms/address)")
-    print(f"Inference time — shiprocket: {their_time:.1f}s total ({1000*their_time/n:.0f}ms/address)")
+    for m in models:
+        t = timings[m]
+        print(f"Inference time — {MODEL_LABELS[m]:32s} {t:.1f}s total ({1000*t/n:.0f}ms/address)")
 
 
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--benchmark", default="gold_test_set.jsonl")
     p.add_argument("--n", type=int, default=None, help="Limit to N examples for a quick run")
+    p.add_argument("--models", nargs="+", choices=ALL_MODELS, default=list(ALL_MODELS),
+                    help="Which models to run (default: all three)")
     p.add_argument("--out", help="Write detailed per-example results to this JSON file")
     args = p.parse_args()
 
     benchmark = load_benchmark(args.benchmark, args.n)
     addresses = [item["raw_address"] for item in benchmark]
-    print(f"Running our model on {len(addresses)} addresses...")
-    ours, our_time = run_ours(addresses)
-    print(f"Running shiprocket's model on {len(addresses)} addresses...")
-    theirs, their_time = run_shiprocket(addresses)
 
-    results = score(benchmark, ours, theirs)
-    print_report(results, our_time, their_time, len(benchmark))
+    preds: dict[str, list[dict]] = {}
+    timings: dict[str, float] = {}
+    for m in args.models:
+        print(f"Running {MODEL_LABELS[m]} on {len(addresses)} addresses...")
+        preds[m], timings[m] = run_model(m, addresses)
+
+    results = score(benchmark, preds)
+    print_report(results, timings, len(benchmark))
 
     if args.out:
         with open(args.out, "w", encoding="utf-8") as f:
             json.dump(
                 {
                     "summary": results,
-                    "timing": {"ours_seconds": our_time, "shiprocket_seconds": their_time},
+                    "timing": {m: timings[m] for m in args.models},
                     "per_example": [
-                        {"raw_address": b["raw_address"], "gold": b["gold"], "ours": o, "shiprocket": t}
-                        for b, o, t in zip(benchmark, ours, theirs)
+                        {"raw_address": b["raw_address"], "gold": b["gold"],
+                         **{m: preds[m][i] for m in args.models}}
+                        for i, b in enumerate(benchmark)
                     ],
                 },
                 f,

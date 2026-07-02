@@ -102,14 +102,19 @@ etc.):
 
 ## Comparison to other models
 
-[`benchmarks/`](benchmarks/) has a head-to-head comparison against Shiprocket's
-[open-tinybert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-tinybert-indian-address-ner)
-on a 237-example held-out gold test set (using the `qwen` backend). Summary: this model
-scores higher on every one of the 9 conceptually-shared fields (sometimes by a wide
-margin — e.g. city 91.3% vs 17.4%, pincode 100% vs 69.2%), while Shiprocket's 6-layer
-TinyBERT is ~240x faster per address. See [`benchmarks/README.md`](benchmarks/README.md)
-for the full field-by-field results and methodology (the two models use
-different field taxonomies, so only overlapping fields are scored).
+[`benchmarks/`](benchmarks/) has a head-to-head comparison of both our backends
+(`t5`, `qwen`) against Shiprocket's
+[open-modernbert-indian-address-ner](https://huggingface.co/shiprocket-ai/open-modernbert-indian-address-ner)
+on a 237-example held-out gold test set. Summary: both of our models score higher
+than modernbert on every one of the 9 conceptually-shared fields, often by a wide
+margin (e.g. city 91.3%/88.6% vs 4.7%, state 96.2%/95.3% vs 35.9%) — modernbert's
+raw per-token predictions show genuinely low-confidence, internally inconsistent
+tagging on longer administrative-suffix text, not just a benchmarking artifact.
+modernbert is ~130-140x faster per address, a real architecture-driven tradeoff
+(small BERT-style encoder vs. our generative models). See
+[`benchmarks/README.md`](benchmarks/README.md) for the full field-by-field
+results and methodology (the models use different field taxonomies, so only
+overlapping fields are scored).
 
 ## Apple Silicon (MLX) users
 
