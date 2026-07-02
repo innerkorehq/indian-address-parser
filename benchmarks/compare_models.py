@@ -1,5 +1,5 @@
-"""Compare this package's three models (flan-t5-small default, Qwen3-0.6B LoRA,
-TinyBERT 4L/312D) against shiprocket-ai/open-modernbert-indian-address-ner on
+"""Compare this package's three models (TinyBERT 4L/312D default, flan-t5-small,
+Qwen3-0.6B LoRA) against shiprocket-ai/open-modernbert-indian-address-ner on
 a held-out gold test set.
 
 Our three models use the SAME 13-field taxonomy (houseNumber/houseName/poi/
@@ -27,9 +27,9 @@ import json
 import time
 
 MODEL_LABELS = {
-    "t5": "flan-t5-small (ours, default)",
-    "qwen": "qwen3-0.6b (ours, previous default)",
-    "tinybert": "tinybert-4l-312d (ours)",
+    "t5": "flan-t5-small (ours, previous default)",
+    "qwen": "qwen3-0.6b (ours, most accurate)",
+    "tinybert": "tinybert-4l-312d (ours, default)",
     "modernbert": "shiprocket modernbert",
 }
 # Short labels for the fixed-width table columns; MODEL_LABELS (above) is used

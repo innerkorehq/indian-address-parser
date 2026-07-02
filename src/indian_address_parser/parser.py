@@ -3,18 +3,22 @@
 Three backends, all fetched from Hugging Face Hub — this package ships only
 inference code, no weights:
 
-- "t5" (default): a full fine-tune of google/flan-t5-small
+- "tinybert" (default): a full fine-tune of huawei-noah/TinyBERT_General_4L_312D
+  (gagan1985/tinybert-4l-312d-indian-address-parser). ~14M params, BERT-style
+  encoder doing token classification (BIO tagging) rather than JSON
+  generation — by far the smallest and fastest option (single model
+  download, no chat template or generation loop), at a few points lower
+  field accuracy than either generative model, particularly on longer/rarer
+  fields. Good default: cheap to load and run, close enough in accuracy for
+  most uses.
+- "t5": a full fine-tune of google/flan-t5-small
   (gagan1985/flan-t5-small-indian-address-parser). ~77M params, encoder-decoder,
-  single model download, no adapter/base-model split. Faster and lighter; a couple
-  points lower accuracy on rare/ambiguous fields.
+  single model download, no adapter/base-model split. A couple points more
+  accurate than tinybert, at noticeably higher inference cost (autoregressive
+  generation vs. one forward pass).
 - "qwen": a LoRA adapter on Qwen/Qwen3-0.6B
   (gagan1985/qwen3-0.6b-indian-address-parser). ~596M params, causal LM, needs
   both the adapter and the base model. The most accurate option.
-- "tinybert": a full fine-tune of huawei-noah/TinyBERT_General_4L_312D
-  (gagan1985/tinybert-4l-312d-indian-address-parser). ~14M params, BERT-style
-  encoder doing token classification (BIO tagging) rather than JSON
-  generation — by far the smallest and fastest option, with lower field
-  accuracy than either generative model, particularly on longer/rarer fields.
 """
 from __future__ import annotations
 
@@ -128,18 +132,18 @@ class AddressParser:
     """Parses raw Indian address strings into 13 structured fields.
 
     Example:
-        >>> parser = AddressParser()  # defaults to the flan-t5-small backend
+        >>> parser = AddressParser()  # defaults to the tinybert backend
         >>> parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
         {'houseNumber': 'FLAT NO.32', 'houseName': 'UTTARA TOWERS', 'poi': None, ...}
 
-        >>> parser = AddressParser(backend="qwen")  # most accurate, LoRA model
-        >>> parser = AddressParser(backend="tinybert")  # smallest, fastest model
+        >>> parser = AddressParser(backend="t5")     # a couple points more accurate, slower
+        >>> parser = AddressParser(backend="qwen")   # most accurate, LoRA model
         >>> parser.parse("...")
     """
 
     def __init__(
         self,
-        backend: str = "t5",
+        backend: str = "tinybert",
         model_repo: str | None = None,
         adapter_repo: str | None = None,
         base_model: str | None = None,

@@ -4,8 +4,8 @@ Usage:
     indian-address-parser "FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029"
     cat addresses.txt | indian-address-parser --stdin
     indian-address-parser --file addresses.txt --out results.jsonl
-    indian-address-parser --backend qwen "..."       # larger, more accurate model
-    indian-address-parser --backend tinybert "..."   # smallest, fastest model
+    indian-address-parser --backend t5 "..."     # a couple points more accurate, slower
+    indian-address-parser --backend qwen "..."   # most accurate, largest/slowest model
 """
 from __future__ import annotations
 
@@ -23,10 +23,10 @@ def main():
     p.add_argument("--file", help="Read addresses from a text file, one per line")
     p.add_argument("--out", help="Write JSONL output to file (default: stdout)")
     p.add_argument(
-        "--backend", choices=BACKENDS, default="t5",
-        help="Model backend: 't5' (default, flan-t5-small, lighter/faster), "
-             "'qwen' (Qwen3-0.6B LoRA, most accurate), or "
-             "'tinybert' (TinyBERT 4L/312D, smallest/fastest)",
+        "--backend", choices=BACKENDS, default="tinybert",
+        help="Model backend: 'tinybert' (default, TinyBERT 4L/312D, smallest/fastest), "
+             "'t5' (flan-t5-small, a couple points more accurate, slower), or "
+             "'qwen' (Qwen3-0.6B LoRA, most accurate)",
     )
     p.add_argument("--model-repo", default=None,
                     help="HF Hub repo for the t5 or tinybert backend (defaults to each backend's own model)")

@@ -39,7 +39,7 @@ def test_invalid_backend_raises():
 def test_parse_real_address_t5():
     from indian_address_parser import AddressParser
 
-    parser = AddressParser()  # default backend is "t5"
+    parser = AddressParser(backend="t5")
     result = parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
 
     assert result["houseNumber"] == "FLAT NO.32"
@@ -65,7 +65,7 @@ def test_parse_real_address_qwen():
 def test_parse_real_address_tinybert():
     from indian_address_parser import AddressParser
 
-    parser = AddressParser(backend="tinybert")
+    parser = AddressParser()  # default backend is "tinybert"
     result = parser.parse("FLAT NO.32, UTTARA TOWERS, MG ROAD GUWAHATI , Kamrup Unclassified AS 781029")
 
     assert result["houseNumber"] == "FLAT NO.32"

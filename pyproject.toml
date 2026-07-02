@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "indian-address-parser"
 version = "0.3.0"
-description = "Parse raw Indian address strings into structured fields using fine-tuned flan-t5-small (default), Qwen3 LoRA, or TinyBERT models"
+description = "Parse raw Indian address strings into structured fields using fine-tuned TinyBERT (default), flan-t5-small, or Qwen3 LoRA models"
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.9"
@@ -33,9 +33,9 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/innerkorehq/indian-address-parser"
 Repository = "https://github.com/innerkorehq/indian-address-parser"
-"Model (t5 - default)" = "https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser"
+"Model (tinybert - default)" = "https://huggingface.co/gagan1985/tinybert-4l-312d-indian-address-parser"
+"Model (t5)" = "https://huggingface.co/gagan1985/flan-t5-small-indian-address-parser"
 "Model (qwen)" = "https://huggingface.co/gagan1985/qwen3-0.6b-indian-address-parser"
-"Model (tinybert)" = "https://huggingface.co/gagan1985/tinybert-4l-312d-indian-address-parser"
 
 [project.scripts]
 indian-address-parser = "indian_address_parser.cli:main"
